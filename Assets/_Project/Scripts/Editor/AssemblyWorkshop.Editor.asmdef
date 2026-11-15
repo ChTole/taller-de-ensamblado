@@ -1,0 +1,14 @@
+{
+    "name": "AssemblyWorkshop.Editor",
+    "rootNamespace": "AssemblyWorkshop.Editor",
+    "references": ["AssemblyWorkshop.Pieces", "AssemblyWorkshop.Joints", "AssemblyWorkshop.Simulation"],
+    "includePlatforms": ["Editor"],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

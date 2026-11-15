@@ -1,0 +1,14 @@
+{
+    "name": "AssemblyWorkshop.Interaction",
+    "rootNamespace": "AssemblyWorkshop.Interaction",
+    "references": ["AssemblyWorkshop.Common", "AssemblyWorkshop.Pieces", "Unity.InputSystem", "UnityEngine.UI"],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

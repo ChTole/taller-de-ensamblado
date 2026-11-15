@@ -9,9 +9,12 @@ Es un **modelo de referencia**, desarrollado sin supervisión de especialistas e
 🚧 En desarrollo.
 
 - [ ] **Versión 1:** tres muebles, solo con encastres.
-  - [x] Mesa ratona (5 piezas): modelado.
-  - [x] Taburete (9 piezas): modelado.
-  - [x] Silla (10 piezas): modelado.
+  - [x] Sistema de ensamblado: manipulación, encastres, deshacer y telemetría.
+  - [ ] Escenas: menú principal, simulación y resumen.
+  - [ ] Muebles:
+    - [x] Mesa ratona (5 piezas): modelada e integrada.
+    - [ ] Taburete (9 piezas): modelado.
+    - [ ] Silla (10 piezas): modelada.
 - [ ] **Versión 2:** los mismos muebles, con uniones atornilladas.
 
 ## Cómo se juega

@@ -1,0 +1,14 @@
+{
+    "name": "AssemblyWorkshop.Telemetry",
+    "rootNamespace": "AssemblyWorkshop.Telemetry",
+    "references": ["AssemblyWorkshop.Common", "AssemblyWorkshop.Pieces", "AssemblyWorkshop.Joints", "AssemblyWorkshop.Simulation", "Bitacora.Runtime"],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

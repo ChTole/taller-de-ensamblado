@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 976375cf5a04445fc8f552d2acc03282, type: 3}
+  m_Name: LivingRoomTableFurniture
+  m_EditorClassIdentifier: AssemblyWorkshop.Simulation::AssemblyWorkshop.Simulation.FurnitureDefinition
+  furnitureId: living_room_table
+  displayName: Mesa de living
+  difficulty: 1
+  description: 
+  thumbnail: {fileID: 21300000, guid: 36c4f0f11023f5cc6bd48558845c0b45, type: 3}
+  piecesPrefab: {fileID: 6086402569276630062, guid: 2ccb5d8257a235c08a910d3ec3526d3f, type: 3}
