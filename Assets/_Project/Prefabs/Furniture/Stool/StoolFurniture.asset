@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 976375cf5a04445fc8f552d2acc03282, type: 3}
+  m_Name: StoolFurniture
+  m_EditorClassIdentifier: AssemblyWorkshop.Simulation::AssemblyWorkshop.Simulation.FurnitureDefinition
+  furnitureId: stool
+  displayName: Stool
+  difficulty: 2
+  description: 
+  thumbnail: {fileID: 21300000, guid: c2796ba94067191ac9276e5c9cb1da93, type: 3}
+  piecesPrefab: {fileID: 2367090934462523050, guid: 5ac4500e187429c0d8bd604b7440519e, type: 3}

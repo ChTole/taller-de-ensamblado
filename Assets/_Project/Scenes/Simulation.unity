@@ -1223,7 +1223,7 @@ MonoBehaviour:
   dragger: {fileID: 1277343896}
   rotator: {fileID: 1277343894}
   furnitureParent: {fileID: 88959480}
-  editorFallback: {fileID: 11400000, guid: 5422f4721e165b963bfc11ad202f24e1, type: 2}
+  editorFallback: {fileID: 11400000, guid: 97e68c7c04f0e2212b5f5f35916b7ffc, type: 2}
   feedbackScene: Feedback
   menuScene: MainMenu
 --- !u!114 &1254205408
@@ -1556,7 +1556,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: AssemblyWorkshop.Pieces::AssemblyWorkshop.Pieces.WorkArea
   size: {x: 2, y: 2}
-  maxLiftHeight: 0.5
+  maxLiftHeight: 1
   pieceLayers:
     serializedVersion: 2
     m_Bits: 4294967295
