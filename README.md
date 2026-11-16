@@ -14,7 +14,7 @@ Es un **modelo de referencia**, desarrollado sin supervisión de especialistas e
   - [ ] Muebles:
     - [x] Mesa ratona (5 piezas): modelada e integrada.
     - [x] Taburete (9 piezas): modelado e integrado.
-    - [ ] Silla (10 piezas): modelada.
+    - [x] Silla (10 piezas): modelada e integrada.
 - [ ] **Versión 2:** los mismos muebles, con uniones atornilladas.
 
 ## Cómo se juega

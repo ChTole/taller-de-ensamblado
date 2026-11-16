@@ -233,6 +233,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 466217849214298293}
+  - component: {fileID: 2854924536484444452}
   m_Layer: 0
   m_Name: Mortise_B
   m_TagString: Untagged
@@ -248,13 +249,31 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 62266836958692734}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: -1, y: 0, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: -1, w: 0}
+  m_LocalPosition: {x: -1, y: 0, z: -0.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2452253797384895563}
-  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+  m_LocalEulerAnglesHint: {x: 180, y: 180, z: 0}
+--- !u!114 &2854924536484444452
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 62266836958692734}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17b09dfcaf15eb2029dc90db84235c25, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: AssemblyWorkshop.Joints::AssemblyWorkshop.Joints.JointPoint
+  jointId: 
+  kind: 1
+  profile: {fileID: 11400000, guid: a44d2595c5587b845adca4e60c640ff2, type: 2}
+  length: 0.02
+  isThrough: 0
+  allowedPartners: []
 --- !u!1 &204577778081218145
 GameObject:
   m_ObjectHideFlags: 0
@@ -264,6 +283,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4504065047738345375}
+  - component: {fileID: 2869857443481495678}
   m_Layer: 0
   m_Name: TenonR_Ref
   m_TagString: Untagged
@@ -286,6 +306,24 @@ Transform:
   m_Children: []
   m_Father: {fileID: 2265888906221857400}
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+--- !u!114 &2869857443481495678
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 204577778081218145}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17b09dfcaf15eb2029dc90db84235c25, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: AssemblyWorkshop.Joints::AssemblyWorkshop.Joints.JointPoint
+  jointId: 
+  kind: 0
+  profile: {fileID: 11400000, guid: a44d2595c5587b845adca4e60c640ff2, type: 2}
+  length: 0.02
+  isThrough: 0
+  allowedPartners: []
 --- !u!1 &239813701989418603
 GameObject:
   m_ObjectHideFlags: 0
@@ -1180,6 +1218,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2244306321665928881}
+  - component: {fileID: 5947182568189054107}
   m_Layer: 0
   m_Name: TenonR_Ref
   m_TagString: Untagged
@@ -1202,6 +1241,24 @@ Transform:
   m_Children: []
   m_Father: {fileID: 7533427126558006682}
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+--- !u!114 &5947182568189054107
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1013899979286870645}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17b09dfcaf15eb2029dc90db84235c25, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: AssemblyWorkshop.Joints::AssemblyWorkshop.Joints.JointPoint
+  jointId: 
+  kind: 0
+  profile: {fileID: 11400000, guid: a44d2595c5587b845adca4e60c640ff2, type: 2}
+  length: 0.02
+  isThrough: 0
+  allowedPartners: []
 --- !u!1 &1016545763823765388
 GameObject:
   m_ObjectHideFlags: 0
@@ -1211,6 +1268,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5115107262464826222}
+  - component: {fileID: 6076581484957921798}
   m_Layer: 0
   m_Name: TenonL_Ref
   m_TagString: Untagged
@@ -1233,6 +1291,24 @@ Transform:
   m_Children: []
   m_Father: {fileID: 8177901591845827942}
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
+--- !u!114 &6076581484957921798
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1016545763823765388}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17b09dfcaf15eb2029dc90db84235c25, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: AssemblyWorkshop.Joints::AssemblyWorkshop.Joints.JointPoint
+  jointId: 
+  kind: 0
+  profile: {fileID: 11400000, guid: a44d2595c5587b845adca4e60c640ff2, type: 2}
+  length: 0.02
+  isThrough: 0
+  allowedPartners: []
 --- !u!1 &1035568403121116296
 GameObject:
   m_ObjectHideFlags: 0
@@ -1390,6 +1466,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4987845348169453517}
+  - component: {fileID: 6935278779823589657}
   m_Layer: 0
   m_Name: Mortise_A
   m_TagString: Untagged
@@ -1406,12 +1483,30 @@ Transform:
   m_GameObject: {fileID: 1172924691378297993}
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -0.205, y: 0, z: 0}
+  m_LocalPosition: {x: -0.205, y: 0.01, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6234401240009215040}
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+--- !u!114 &6935278779823589657
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1172924691378297993}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17b09dfcaf15eb2029dc90db84235c25, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: AssemblyWorkshop.Joints::AssemblyWorkshop.Joints.JointPoint
+  jointId: 
+  kind: 1
+  profile: {fileID: 11400000, guid: a44d2595c5587b845adca4e60c640ff2, type: 2}
+  length: 0.02
+  isThrough: 1
+  allowedPartners: []
 --- !u!1 &1192384683817982484
 GameObject:
   m_ObjectHideFlags: 0
@@ -1645,6 +1740,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5331271608563114256}
+  - component: {fileID: 4913156806581948848}
   m_Layer: 0
   m_Name: CrossBarFR_A
   m_TagString: Untagged
@@ -1670,6 +1766,19 @@ Transform:
   - {fileID: 6094223701629144420}
   m_Father: {fileID: 5660837884471741700}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4913156806581948848
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1300327623746016700}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4da8604e53a44c11b9f7909c011330a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: AssemblyWorkshop.Pieces::AssemblyWorkshop.Pieces.AssemblyPiece
+  pieceId: 
 --- !u!1 &1301769382748135487
 GameObject:
   m_ObjectHideFlags: 0
@@ -1936,6 +2045,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5867333724009357252}
+  - component: {fileID: 405745479402876426}
   m_Layer: 0
   m_Name: TenonR_Ref
   m_TagString: Untagged
@@ -1958,6 +2068,24 @@ Transform:
   m_Children: []
   m_Father: {fileID: 6094223701629144420}
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+--- !u!114 &405745479402876426
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1529015724269218351}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17b09dfcaf15eb2029dc90db84235c25, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: AssemblyWorkshop.Joints::AssemblyWorkshop.Joints.JointPoint
+  jointId: 
+  kind: 0
+  profile: {fileID: 11400000, guid: a44d2595c5587b845adca4e60c640ff2, type: 2}
+  length: 0.02
+  isThrough: 0
+  allowedPartners: []
 --- !u!1 &1565329895016353711
 GameObject:
   m_ObjectHideFlags: 0
@@ -2079,6 +2207,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2057371280352244292}
+  - component: {fileID: 8339765597178010588}
   m_Layer: 0
   m_Name: TenonR_Ref
   m_TagString: Untagged
@@ -2101,6 +2230,24 @@ Transform:
   m_Children: []
   m_Father: {fileID: 7126746025210570172}
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+--- !u!114 &8339765597178010588
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1589978894202839243}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17b09dfcaf15eb2029dc90db84235c25, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: AssemblyWorkshop.Joints::AssemblyWorkshop.Joints.JointPoint
+  jointId: 
+  kind: 0
+  profile: {fileID: 11400000, guid: a44d2595c5587b845adca4e60c640ff2, type: 2}
+  length: 0.02
+  isThrough: 0
+  allowedPartners: []
 --- !u!1 &1601082068733366772
 GameObject:
   m_ObjectHideFlags: 0
@@ -2558,6 +2705,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4256197745001362474}
+  - component: {fileID: 2824707898334432608}
   m_Layer: 0
   m_Name: Mortise_A
   m_TagString: Untagged
@@ -2573,13 +2721,31 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2039538640417714991}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -0.205, y: 0, z: 0}
+  m_LocalRotation: {x: 0.5, y: -0.5, z: 0.5, w: 0.5}
+  m_LocalPosition: {x: -0.205, y: 0.01, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4658651342279644921}
-  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 90}
+--- !u!114 &2824707898334432608
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2039538640417714991}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17b09dfcaf15eb2029dc90db84235c25, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: AssemblyWorkshop.Joints::AssemblyWorkshop.Joints.JointPoint
+  jointId: 
+  kind: 1
+  profile: {fileID: 11400000, guid: a44d2595c5587b845adca4e60c640ff2, type: 2}
+  length: 0.02
+  isThrough: 1
+  allowedPartners: []
 --- !u!1 &2045187117985188844
 GameObject:
   m_ObjectHideFlags: 0
@@ -2813,6 +2979,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3219287231748032091}
+  - component: {fileID: 2150501873614022831}
   m_Layer: 0
   m_Name: Mortise_B
   m_TagString: Untagged
@@ -2828,13 +2995,31 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2087853255947999259}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: -1, y: 0, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: -1, w: 0}
+  m_LocalPosition: {x: -1, y: 0, z: -0.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7252893728721865141}
-  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+  m_LocalEulerAnglesHint: {x: 180, y: 180, z: 0}
+--- !u!114 &2150501873614022831
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2087853255947999259}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17b09dfcaf15eb2029dc90db84235c25, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: AssemblyWorkshop.Joints::AssemblyWorkshop.Joints.JointPoint
+  jointId: 
+  kind: 1
+  profile: {fileID: 11400000, guid: a44d2595c5587b845adca4e60c640ff2, type: 2}
+  length: 0.02
+  isThrough: 1
+  allowedPartners: []
 --- !u!1 &2226104931434971343
 GameObject:
   m_ObjectHideFlags: 0
@@ -2990,6 +3175,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 708721145901677754}
+  - component: {fileID: 3329552662243775974}
   m_Layer: 0
   m_Name: TenonSeat_Ref
   m_TagString: Untagged
@@ -3006,12 +3192,30 @@ Transform:
   m_GameObject: {fileID: 2313273880795306944}
   serializedVersion: 2
   m_LocalRotation: {x: -0.5, y: 0.5, z: 0.5, w: 0.5}
-  m_LocalPosition: {x: 0.075, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.03, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7412636890628420641}
   m_LocalEulerAnglesHint: {x: -90, y: 90, z: 0}
+--- !u!114 &3329552662243775974
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2313273880795306944}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17b09dfcaf15eb2029dc90db84235c25, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: AssemblyWorkshop.Joints::AssemblyWorkshop.Joints.JointPoint
+  jointId: 
+  kind: 0
+  profile: {fileID: 11400000, guid: a44d2595c5587b845adca4e60c640ff2, type: 2}
+  length: 0.02
+  isThrough: 0
+  allowedPartners: []
 --- !u!1 &2328877393405630857
 GameObject:
   m_ObjectHideFlags: 0
@@ -3055,6 +3259,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1677488380523634014}
+  - component: {fileID: 2334601468784646528}
   m_Layer: 0
   m_Name: Mortise_A
   m_TagString: Untagged
@@ -3070,13 +3275,31 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2426885075597973020}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: 0.01, y: 0.2, z: -0.02}
+  m_LocalRotation: {x: 0, y: 0, z: -1, w: 0}
+  m_LocalPosition: {x: 0.01, y: 0.205, z: -0.04}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2784191608301405306}
-  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+  m_LocalEulerAnglesHint: {x: 180, y: 180, z: 0}
+--- !u!114 &2334601468784646528
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2426885075597973020}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17b09dfcaf15eb2029dc90db84235c25, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: AssemblyWorkshop.Joints::AssemblyWorkshop.Joints.JointPoint
+  jointId: 
+  kind: 1
+  profile: {fileID: 11400000, guid: a44d2595c5587b845adca4e60c640ff2, type: 2}
+  length: 0.02
+  isThrough: 0
+  allowedPartners: []
 --- !u!1 &2485205941204755323
 GameObject:
   m_ObjectHideFlags: 0
@@ -3978,6 +4201,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3662416766972193359}
+  - component: {fileID: 2731327999991351525}
   m_Layer: 0
   m_Name: TenonL_Ref
   m_TagString: Untagged
@@ -4000,6 +4224,24 @@ Transform:
   m_Children: []
   m_Father: {fileID: 7946748220201939273}
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
+--- !u!114 &2731327999991351525
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3029410876791701895}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17b09dfcaf15eb2029dc90db84235c25, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: AssemblyWorkshop.Joints::AssemblyWorkshop.Joints.JointPoint
+  jointId: 
+  kind: 0
+  profile: {fileID: 11400000, guid: a44d2595c5587b845adca4e60c640ff2, type: 2}
+  length: 0.02
+  isThrough: 0
+  allowedPartners: []
 --- !u!1 &3057638549229822399
 GameObject:
   m_ObjectHideFlags: 0
@@ -4009,6 +4251,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5521177370001317560}
+  - component: {fileID: 4434267030856826522}
   m_Layer: 0
   m_Name: CrossBarFR_B
   m_TagString: Untagged
@@ -4034,6 +4277,19 @@ Transform:
   - {fileID: 7126746025210570172}
   m_Father: {fileID: 5660837884471741700}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4434267030856826522
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3057638549229822399}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4da8604e53a44c11b9f7909c011330a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: AssemblyWorkshop.Pieces::AssemblyWorkshop.Pieces.AssemblyPiece
+  pieceId: 
 --- !u!1 &3058673442943175915
 GameObject:
   m_ObjectHideFlags: 0
@@ -4782,6 +5038,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 934007199189214356}
+  - component: {fileID: 7189252689828893922}
   m_Layer: 0
   m_Name: Mortise_A
   m_TagString: Untagged
@@ -4797,13 +5054,31 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3557792978175653236}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: 0.01, y: 0.2, z: -0.02}
+  m_LocalRotation: {x: 0, y: 0, z: -1, w: 0}
+  m_LocalPosition: {x: 0.01, y: 0.205, z: -0.04}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2476402100149716079}
-  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+  m_LocalEulerAnglesHint: {x: 180, y: 180, z: 0}
+--- !u!114 &7189252689828893922
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3557792978175653236}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17b09dfcaf15eb2029dc90db84235c25, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: AssemblyWorkshop.Joints::AssemblyWorkshop.Joints.JointPoint
+  jointId: 
+  kind: 1
+  profile: {fileID: 11400000, guid: a44d2595c5587b845adca4e60c640ff2, type: 2}
+  length: 0.02
+  isThrough: 0
+  allowedPartners: []
 --- !u!1 &3637493136881231046
 GameObject:
   m_ObjectHideFlags: 0
@@ -5105,6 +5380,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6409330203887647017}
+  - component: {fileID: 2388798167878521250}
   m_Layer: 0
   m_Name: BackRest
   m_TagString: Untagged
@@ -5130,6 +5406,19 @@ Transform:
   - {fileID: 7224627020775195129}
   m_Father: {fileID: 5660837884471741700}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2388798167878521250
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4006543763871847825}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4da8604e53a44c11b9f7909c011330a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: AssemblyWorkshop.Pieces::AssemblyWorkshop.Pieces.AssemblyPiece
+  pieceId: 
 --- !u!1 &4041580785786120652
 GameObject:
   m_ObjectHideFlags: 0
@@ -5981,6 +6270,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5442023069440526906}
+  - component: {fileID: 4177914469187919848}
   m_Layer: 0
   m_Name: TenonL_Ref
   m_TagString: Untagged
@@ -6003,6 +6293,24 @@ Transform:
   m_Children: []
   m_Father: {fileID: 5012211511786409203}
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
+--- !u!114 &4177914469187919848
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4808119831140364768}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17b09dfcaf15eb2029dc90db84235c25, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: AssemblyWorkshop.Joints::AssemblyWorkshop.Joints.JointPoint
+  jointId: 
+  kind: 0
+  profile: {fileID: 11400000, guid: a44d2595c5587b845adca4e60c640ff2, type: 2}
+  length: 0.02
+  isThrough: 0
+  allowedPartners: []
 --- !u!1 &4855953352880944456
 GameObject:
   m_ObjectHideFlags: 0
@@ -6124,6 +6432,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1929415598303817817}
+  - component: {fileID: 597051469431640944}
   m_Layer: 0
   m_Name: TenonBackRest_Ref
   m_TagString: Untagged
@@ -6146,6 +6455,24 @@ Transform:
   m_Children: []
   m_Father: {fileID: 8014596646180687026}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &597051469431640944
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5147797095534639594}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17b09dfcaf15eb2029dc90db84235c25, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: AssemblyWorkshop.Joints::AssemblyWorkshop.Joints.JointPoint
+  jointId: 
+  kind: 0
+  profile: {fileID: 11400000, guid: a44d2595c5587b845adca4e60c640ff2, type: 2}
+  length: 0.02
+  isThrough: 0
+  allowedPartners: []
 --- !u!1 &5160163629280316941
 GameObject:
   m_ObjectHideFlags: 0
@@ -6188,6 +6515,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2312707596722698065}
+  - component: {fileID: 3547235423717665329}
   m_Layer: 0
   m_Name: TenonSeat_Ref
   m_TagString: Untagged
@@ -6204,12 +6532,30 @@ Transform:
   m_GameObject: {fileID: 5358612718096008091}
   serializedVersion: 2
   m_LocalRotation: {x: -0.5, y: 0.5, z: 0.5, w: 0.5}
-  m_LocalPosition: {x: 0.075, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.03, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6356547020909423175}
   m_LocalEulerAnglesHint: {x: -90, y: 90, z: 0}
+--- !u!114 &3547235423717665329
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5358612718096008091}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17b09dfcaf15eb2029dc90db84235c25, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: AssemblyWorkshop.Joints::AssemblyWorkshop.Joints.JointPoint
+  jointId: 
+  kind: 0
+  profile: {fileID: 11400000, guid: a44d2595c5587b845adca4e60c640ff2, type: 2}
+  length: 0.02
+  isThrough: 0
+  allowedPartners: []
 --- !u!1 &5495416968700512666
 GameObject:
   m_ObjectHideFlags: 0
@@ -6331,6 +6677,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7352707685735609266}
+  - component: {fileID: 9139403784368804545}
   m_Layer: 0
   m_Name: Mortise_B
   m_TagString: Untagged
@@ -6346,13 +6693,31 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5560358491470346386}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: -1, y: 0, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: -1, w: 0}
+  m_LocalPosition: {x: -1, y: -0, z: -0.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1734347356727180935}
-  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+  m_LocalEulerAnglesHint: {x: 180, y: 180, z: 0}
+--- !u!114 &9139403784368804545
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5560358491470346386}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17b09dfcaf15eb2029dc90db84235c25, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: AssemblyWorkshop.Joints::AssemblyWorkshop.Joints.JointPoint
+  jointId: 
+  kind: 1
+  profile: {fileID: 11400000, guid: a44d2595c5587b845adca4e60c640ff2, type: 2}
+  length: 0.02
+  isThrough: 1
+  allowedPartners: []
 --- !u!1 &5561870194931191684
 GameObject:
   m_ObjectHideFlags: 0
@@ -7100,6 +7465,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2505659963057485316}
+  - component: {fileID: 6059520585292769109}
   m_Layer: 0
   m_Name: LegRearLeft
   m_TagString: Untagged
@@ -7124,6 +7490,19 @@ Transform:
   - {fileID: 7539618385312323915}
   m_Father: {fileID: 5660837884471741700}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
+--- !u!114 &6059520585292769109
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6178686303963320186}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4da8604e53a44c11b9f7909c011330a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: AssemblyWorkshop.Pieces::AssemblyWorkshop.Pieces.AssemblyPiece
+  pieceId: 
 --- !u!1 &6181687428566651660
 GameObject:
   m_ObjectHideFlags: 0
@@ -7133,6 +7512,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4233958465382643839}
+  - component: {fileID: 4346787306072601904}
   m_Layer: 0
   m_Name: Mortise_A
   m_TagString: Untagged
@@ -7148,13 +7528,31 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6181687428566651660}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: 0.01, y: 0.2, z: -0.02}
+  m_LocalRotation: {x: 0, y: 0, z: -1, w: 0}
+  m_LocalPosition: {x: 0.01, y: 0.205, z: -0.04}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6968604430172589572}
-  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+  m_LocalEulerAnglesHint: {x: 180, y: 180, z: 0}
+--- !u!114 &4346787306072601904
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6181687428566651660}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17b09dfcaf15eb2029dc90db84235c25, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: AssemblyWorkshop.Joints::AssemblyWorkshop.Joints.JointPoint
+  jointId: 
+  kind: 1
+  profile: {fileID: 11400000, guid: a44d2595c5587b845adca4e60c640ff2, type: 2}
+  length: 0.02
+  isThrough: 1
+  allowedPartners: []
 --- !u!1 &6373176719519246055
 GameObject:
   m_ObjectHideFlags: 0
@@ -7276,6 +7674,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5031902734615095322}
+  - component: {fileID: 557737768782803659}
   m_Layer: 0
   m_Name: TenonL_Ref
   m_TagString: Untagged
@@ -7298,6 +7697,24 @@ Transform:
   m_Children: []
   m_Father: {fileID: 2287530914310177416}
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
+--- !u!114 &557737768782803659
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6412601118525218276}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17b09dfcaf15eb2029dc90db84235c25, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: AssemblyWorkshop.Joints::AssemblyWorkshop.Joints.JointPoint
+  jointId: 
+  kind: 0
+  profile: {fileID: 11400000, guid: a44d2595c5587b845adca4e60c640ff2, type: 2}
+  length: 0.02
+  isThrough: 0
+  allowedPartners: []
 --- !u!1 &6481307515345799546
 GameObject:
   m_ObjectHideFlags: 0
@@ -7531,6 +7948,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2989589002956699013}
+  - component: {fileID: 3715424309779667863}
   m_Layer: 0
   m_Name: Mortise_B
   m_TagString: Untagged
@@ -7546,13 +7964,31 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6608346396293272198}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 0.205, y: 0, z: 0}
+  m_LocalRotation: {x: 0.5, y: -0.5, z: 0.5, w: 0.5}
+  m_LocalPosition: {x: 0.205, y: 0.01, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7224627020775195129}
-  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 90}
+--- !u!114 &3715424309779667863
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6608346396293272198}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17b09dfcaf15eb2029dc90db84235c25, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: AssemblyWorkshop.Joints::AssemblyWorkshop.Joints.JointPoint
+  jointId: 
+  kind: 1
+  profile: {fileID: 11400000, guid: a44d2595c5587b845adca4e60c640ff2, type: 2}
+  length: 0.02
+  isThrough: 1
+  allowedPartners: []
 --- !u!1 &6669941730578112258
 GameObject:
   m_ObjectHideFlags: 0
@@ -7931,6 +8367,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3004253766052993602}
+  - component: {fileID: 7452634367061731233}
   m_Layer: 0
   m_Name: CrossBarSide_B
   m_TagString: Untagged
@@ -7957,6 +8394,19 @@ Transform:
   - {fileID: 6356547020909423175}
   m_Father: {fileID: 5660837884471741700}
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+--- !u!114 &7452634367061731233
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7033796275100411866}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4da8604e53a44c11b9f7909c011330a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: AssemblyWorkshop.Pieces::AssemblyWorkshop.Pieces.AssemblyPiece
+  pieceId: 
 --- !u!1 &7081119270398948322
 GameObject:
   m_ObjectHideFlags: 0
@@ -8145,6 +8595,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7046991605998703016}
+  - component: {fileID: 5886695658192549012}
   m_Layer: 0
   m_Name: CrossBarSide_A
   m_TagString: Untagged
@@ -8171,6 +8622,19 @@ Transform:
   - {fileID: 7412636890628420641}
   m_Father: {fileID: 5660837884471741700}
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+--- !u!114 &5886695658192549012
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7175415767325873246}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4da8604e53a44c11b9f7909c011330a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: AssemblyWorkshop.Pieces::AssemblyWorkshop.Pieces.AssemblyPiece
+  pieceId: 
 --- !u!1 &7355300147917856998
 GameObject:
   m_ObjectHideFlags: 0
@@ -8180,6 +8644,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5651786230507271066}
+  - component: {fileID: 1256613520513208253}
   m_Layer: 0
   m_Name: Mortise_A
   m_TagString: Untagged
@@ -8195,13 +8660,31 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7355300147917856998}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: 0.01, y: 0.2, z: -0.02}
+  m_LocalRotation: {x: 0, y: 0, z: -1, w: 0}
+  m_LocalPosition: {x: 0.01, y: 0.205, z: -0.04}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5258730090274981014}
-  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+  m_LocalEulerAnglesHint: {x: 180, y: 180, z: 0}
+--- !u!114 &1256613520513208253
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7355300147917856998}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17b09dfcaf15eb2029dc90db84235c25, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: AssemblyWorkshop.Joints::AssemblyWorkshop.Joints.JointPoint
+  jointId: 
+  kind: 1
+  profile: {fileID: 11400000, guid: a44d2595c5587b845adca4e60c640ff2, type: 2}
+  length: 0.02
+  isThrough: 1
+  allowedPartners: []
 --- !u!1 &7476042136296444388
 GameObject:
   m_ObjectHideFlags: 0
@@ -8324,6 +8807,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4656440356075801443}
+  - component: {fileID: 8438220193759783313}
   m_Layer: 0
   m_Name: Mortise_B
   m_TagString: Untagged
@@ -8339,13 +8823,31 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7556109084112129840}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: -1, y: 0, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: -1, w: 0}
+  m_LocalPosition: {x: -1, y: -0, z: -0.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2205540625775753138}
-  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+  m_LocalEulerAnglesHint: {x: 180, y: 180, z: 0}
+--- !u!114 &8438220193759783313
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7556109084112129840}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17b09dfcaf15eb2029dc90db84235c25, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: AssemblyWorkshop.Joints::AssemblyWorkshop.Joints.JointPoint
+  jointId: 
+  kind: 1
+  profile: {fileID: 11400000, guid: a44d2595c5587b845adca4e60c640ff2, type: 2}
+  length: 0.02
+  isThrough: 0
+  allowedPartners: []
 --- !u!1 &7607295656252291762
 GameObject:
   m_ObjectHideFlags: 0
@@ -8682,6 +9184,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4376842252613750707}
+  - component: {fileID: 4088769830784778866}
   m_Layer: 0
   m_Name: LegFrontLeft
   m_TagString: Untagged
@@ -8707,6 +9210,19 @@ Transform:
   - {fileID: 1294023492261396101}
   m_Father: {fileID: 5660837884471741700}
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 90}
+--- !u!114 &4088769830784778866
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8135530108629017898}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4da8604e53a44c11b9f7909c011330a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: AssemblyWorkshop.Pieces::AssemblyWorkshop.Pieces.AssemblyPiece
+  pieceId: 
 --- !u!1 &8139723783163320029
 GameObject:
   m_ObjectHideFlags: 0
@@ -8750,6 +9266,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5042208344970289029}
+  - component: {fileID: 7275294594964554953}
   m_Layer: 0
   m_Name: LegRearRight
   m_TagString: Untagged
@@ -8774,6 +9291,19 @@ Transform:
   - {fileID: 7142432061905407452}
   m_Father: {fileID: 5660837884471741700}
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 90}
+--- !u!114 &7275294594964554953
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8165674476932507764}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4da8604e53a44c11b9f7909c011330a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: AssemblyWorkshop.Pieces::AssemblyWorkshop.Pieces.AssemblyPiece
+  pieceId: 
 --- !u!1 &8213946466678925367
 GameObject:
   m_ObjectHideFlags: 0
@@ -8930,6 +9460,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2905036533716816753}
+  - component: {fileID: 2145348444405513121}
   m_Layer: 0
   m_Name: Seat
   m_TagString: Untagged
@@ -8955,6 +9486,19 @@ Transform:
   - {fileID: 3547996467160065520}
   m_Father: {fileID: 5660837884471741700}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2145348444405513121
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8256455654323116926}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4da8604e53a44c11b9f7909c011330a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: AssemblyWorkshop.Pieces::AssemblyWorkshop.Pieces.AssemblyPiece
+  pieceId: 
 --- !u!1 &8287406792155683112
 GameObject:
   m_ObjectHideFlags: 0
@@ -8964,6 +9508,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1892517432010540741}
+  - component: {fileID: 2078042753113935106}
   m_Layer: 0
   m_Name: Mortise_B
   m_TagString: Untagged
@@ -8980,12 +9525,30 @@ Transform:
   m_GameObject: {fileID: 8287406792155683112}
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 0.205, y: 0, z: 0}
+  m_LocalPosition: {x: 0.205, y: 0.01, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3547996467160065520}
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+--- !u!114 &2078042753113935106
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8287406792155683112}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17b09dfcaf15eb2029dc90db84235c25, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: AssemblyWorkshop.Joints::AssemblyWorkshop.Joints.JointPoint
+  jointId: 
+  kind: 1
+  profile: {fileID: 11400000, guid: a44d2595c5587b845adca4e60c640ff2, type: 2}
+  length: 0.02
+  isThrough: 1
+  allowedPartners: []
 --- !u!1 &8417251618857425095
 GameObject:
   m_ObjectHideFlags: 0
@@ -9031,6 +9594,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2300405637226692247}
+  - component: {fileID: 2929139692912485401}
   m_Layer: 0
   m_Name: LegFrontRight
   m_TagString: Untagged
@@ -9056,6 +9620,19 @@ Transform:
   - {fileID: 2497305574358686387}
   m_Father: {fileID: 5660837884471741700}
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 90}
+--- !u!114 &2929139692912485401
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8439067774959976653}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4da8604e53a44c11b9f7909c011330a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: AssemblyWorkshop.Pieces::AssemblyWorkshop.Pieces.AssemblyPiece
+  pieceId: 
 --- !u!1 &8538604654328206514
 GameObject:
   m_ObjectHideFlags: 0
@@ -9323,6 +9900,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5654255520706750839}
+  - component: {fileID: 4952545956871892224}
   m_Layer: 0
   m_Name: TenonBackRest_Ref
   m_TagString: Untagged
@@ -9345,6 +9923,24 @@ Transform:
   m_Children: []
   m_Father: {fileID: 5235531614223663062}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4952545956871892224
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8892874016167992263}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17b09dfcaf15eb2029dc90db84235c25, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: AssemblyWorkshop.Joints::AssemblyWorkshop.Joints.JointPoint
+  jointId: 
+  kind: 0
+  profile: {fileID: 11400000, guid: a44d2595c5587b845adca4e60c640ff2, type: 2}
+  length: 0.02
+  isThrough: 0
+  allowedPartners: []
 --- !u!1 &9006324372513594271
 GameObject:
   m_ObjectHideFlags: 0

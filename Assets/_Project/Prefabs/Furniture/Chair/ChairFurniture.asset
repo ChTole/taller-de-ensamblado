@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 976375cf5a04445fc8f552d2acc03282, type: 3}
+  m_Name: ChairFurniture
+  m_EditorClassIdentifier: AssemblyWorkshop.Simulation::AssemblyWorkshop.Simulation.FurnitureDefinition
+  furnitureId: chair
+  displayName: Silla
+  difficulty: 3
+  description: 
+  thumbnail: {fileID: 21300000, guid: dd8604fe63cdcfc6d979c793f864cf2b, type: 3}
+  piecesPrefab: {fileID: 3028553808513467669, guid: 0d0c3578053cd23c0a12e1e12b05c027, type: 3}
