@@ -1,0 +1,11 @@
+# Taller de Ensamblado
+
+> Simulación de carpintería en el navegador, desarrollada en Unity: armar muebles uniendo sus piezas con encastres de caja y espiga. Modelo de referencia y demo para aprendizajes simulados; registra cada sesión de forma anónima con Bitácora.
+
+La simulación se ejecuta dentro de un canvas, así que su contenido no está disponible como texto. La información completa está en los enlaces.
+
+## Enlaces
+
+- [Repositorio](https://github.com/ChTole/taller-ensamblado): código fuente y documentación.
+- [Bitácora](https://github.com/ChTole/bitacora): package de Unity para la telemetría de sesiones.
+- [Portfolio](https://christiantoledo-dev.netlify.app): autor y otros proyectos.

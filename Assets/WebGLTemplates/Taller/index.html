@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, user-scalable=no, shrink-to-fit=yes">
+    <title>Taller de Ensamblado | Simulación de carpintería</title>
+    <meta name="description" content="Simulación de carpintería en el navegador: armá muebles uniendo sus piezas con encastres de caja y espiga. Funciona en computadora y celular.">
+    <meta name="author" content="Christian Ariel Toledo">
+    <meta name="theme-color" content="#D7D9DA">
+    <link rel="canonical" href="https://taller-de-ensamblado.netlify.app/">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+
+    <!-- Preview when the link is shared (LinkedIn, WhatsApp, X, etc.) -->
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="es_AR">
+    <meta property="og:title" content="Taller de Ensamblado">
+    <meta property="og:description" content="Simulación de carpintería en el navegador: armá muebles uniendo sus piezas con encastres de caja y espiga.">
+    <meta property="og:url" content="https://taller-de-ensamblado.netlify.app/">
+    <meta property="og:image" content="https://taller-de-ensamblado.netlify.app/og-image.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Taller de Ensamblado: una mesa ratona, un taburete y una silla de madera armados con encastres.">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <canvas id="unity-canvas" tabindex="-1" aria-label="Simulación Taller de Ensamblado"></canvas>
+
+    <div id="loading" role="status" aria-live="polite">
+      <h1>Taller de Ensamblado</h1>
+      <p class="subtitle">Simulación de carpintería</p>
+      <div class="progress" aria-hidden="true"><div id="progress-fill"></div></div>
+      <p id="progress-text">Cargando…</p>
+    </div>
+
+    <div id="banner" role="alert"></div>
+
+    <noscript>
+      <div class="noscript">
+        <h1>Taller de Ensamblado</h1>
+        <p>Simulación de carpintería en el navegador: armá muebles uniendo sus piezas con encastres de caja y espiga.</p>
+        <p>Para usarla, activá JavaScript en tu navegador.</p>
+      </div>
+    </noscript>
+
+    <script>
+      var canvas = document.querySelector("#unity-canvas");
+      var loading = document.querySelector("#loading");
+      var progressFill = document.querySelector("#progress-fill");
+      var progressText = document.querySelector("#progress-text");
+      var banner = document.querySelector("#banner");
+
+      // Unity calls this to show warnings and errors; warnings disappear after a few seconds
+      function showBanner(message, type) {
+        var item = document.createElement("div");
+        item.className = type === "error" ? "error" : "warning";
+        item.textContent = message;
+        banner.appendChild(item);
+        if (type !== "error") {
+          setTimeout(function () { banner.removeChild(item); }, 5000);
+        }
+      }
+
+      var buildUrl = "Build";
+      var config = {
+        arguments: [],
+        dataUrl: buildUrl + "/{{{ DATA_FILENAME }}}",
+        frameworkUrl: buildUrl + "/{{{ FRAMEWORK_FILENAME }}}",
+        codeUrl: buildUrl + "/{{{ CODE_FILENAME }}}",
+#if MEMORY_FILENAME
+        memoryUrl: buildUrl + "/{{{ MEMORY_FILENAME }}}",
+#endif
+#if SYMBOLS_FILENAME
+        symbolsUrl: buildUrl + "/{{{ SYMBOLS_FILENAME }}}",
+#endif
+        streamingAssetsUrl: "StreamingAssets",
+        companyName: {{{ JSON.stringify(COMPANY_NAME) }}},
+        productName: {{{ JSON.stringify(PRODUCT_NAME) }}},
+        productVersion: {{{ JSON.stringify(PRODUCT_VERSION) }}},
+        showBanner: showBanner,
+        // Phones with very high pixel density render at most at 2x: same look, less work for the GPU
+        devicePixelRatio: Math.min(window.devicePixelRatio || 1, 2)
+      };
+
+      var script = document.createElement("script");
+      script.src = buildUrl + "/{{{ LOADER_FILENAME }}}";
+      script.onload = function () {
+        createUnityInstance(canvas, config, function (progress) {
+          var percent = Math.round(progress * 100);
+          progressFill.style.width = percent + "%";
+          progressText.textContent = percent < 100 ? "Cargando… " + percent + "%" : "Preparando el taller…";
+        }).then(function () {
+          loading.classList.add("hidden");
+        }).catch(function (message) {
+          progressText.textContent = "No se pudo cargar la simulación.";
+          showBanner(String(message), "error");
+        });
+      };
+      script.onerror = function () {
+        progressText.textContent = "No se pudo cargar la simulación.";
+      };
+      document.body.appendChild(script);
+    </script>
+  </body>
+</html>

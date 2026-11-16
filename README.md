@@ -2,22 +2,25 @@
 
 Simulación de carpintería para navegador: armar muebles a partir de sus piezas, uniéndolas con encastres de caja y espiga.
 
+🔗 **Demo:** [taller-de-ensamblado.netlify.app](https://taller-de-ensamblado.netlify.app/)
+
 Es un **modelo de referencia**, desarrollado sin supervisión de especialistas en carpintería. Las piezas, medidas y procedimientos son ilustrativos y no reemplazan la formación práctica. Es una demo que sienta las bases técnicas para abordar aprendizajes simulados, y registra cada sesión con [Bitácora](https://github.com/ChTole/bitacora) para analizar cómo se resuelve el armado.
 
 ## Estado
 
-🚧 En desarrollo.
+🚧 En desarrollo. La versión 1 está publicada.
 
 - [x] **Versión 1:** tres muebles, solo con encastres.
   - [x] Sistema de ensamblado: manipulación, encastres, deshacer y telemetría.
   - [x] Escenas:
-    - [x] Menú principal
+    - [x] Menú principal.
     - [x] Simulación: escritorio y móvil.
     - [x] Resumen.
   - [x] Muebles:
     - [x] Mesa ratona (5 piezas): modelada e integrada.
     - [x] Taburete (9 piezas): modelado e integrado.
     - [x] Silla (10 piezas): modelada e integrada.
+  - [x] Publicación web.
 - [ ] **Versión 2:** los mismos muebles, con uniones atornilladas.
 
 ## Cómo se juega
@@ -26,16 +29,18 @@ Es un **modelo de referencia**, desarrollado sin supervisión de especialistas e
 2. Encastrar las piezas sobre la mesa de trabajo. **Ver ayuda**, mientras se mantiene presionado, muestra el mueble armado.
 3. Presionar **Comprobar** para terminar y ver el resumen.
 
-| Acción | Control |
-|---|---|
-| Agarrar y mover una pieza | Clic izquierdo y arrastrar |
-| Subir o bajar la pieza agarrada | Shift mientras se arrastra |
-| Girar 90° sobre el eje vertical | A / D o flechas izquierda / derecha |
-| Volcar 90° hacia adelante o atrás | W / S o flechas arriba / abajo |
-| Deshacer el último encastre | Ctrl + Z |
-| Sacar la pieza bajo el cursor | X |
-| Orbitar la cámara | Clic derecho y arrastrar |
-| Acercar o alejar la cámara | Rueda del mouse |
+| Acción | Mouse y teclado | Pantalla táctil |
+|---|---|---|
+| Agarrar y mover una pieza | Clic izquierdo y arrastrar | Arrastrar con un dedo |
+| Subir o bajar la pieza agarrada | Shift mientras se arrastra | Botón de subir y bajar, y arrastrar |
+| Girar 90° sobre el eje vertical | A / D o flechas izquierda / derecha | Botones de giro |
+| Volcar 90° hacia adelante o atrás | W / S o flechas arriba / abajo | Botones de volcado |
+| Deshacer el último encastre | Ctrl + Z | Botón de deshacer |
+| Sacar una pieza | X, sobre la pieza bajo el cursor | Botón de quitar, sobre la última pieza tocada |
+| Orbitar la cámara | Clic derecho y arrastrar | Arrastrar con dos dedos |
+| Acercar o alejar la cámara | Rueda del mouse | Pellizcar |
+
+Los botones táctiles aparecen automáticamente en celulares y tablets, y se pueden activar o desactivar desde la simulación.
 
 ## Requisitos
 
@@ -47,7 +52,7 @@ Es un **modelo de referencia**, desarrollado sin supervisión de especialistas e
 2. Al abrir el proyecto, Unity descarga las dependencias.
 3. Abrir la escena `MainMenu` y presionar Play.
 
-Para compilar: **File → Build Profiles → Web**, con las escenas `MainMenu`, `Simulation` y `Feedback` en ese orden en la **Scene List**.
+Para compilar: **File → Build Profiles → Web**, con las escenas `MainMenu`, `Simulation` y `Feedback` en ese orden en la **Scene List**. La página usa una plantilla propia, `Assets/WebGLTemplates/Taller`, que incluye la pantalla de carga y los metadatos del sitio.
 
 ## Dependencias
 
