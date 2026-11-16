@@ -21,6 +21,7 @@ namespace AssemblyWorkshop.Telemetry
         [SerializeField] private AssemblyGraph graph;
         [SerializeField] private JointDetector detector;
         [SerializeField] private JointSnapper snapper;
+        [SerializeField] private HelpTracker helpTracker;
 
         [Tooltip("Editor only: if there is no active session when entering Play Mode in this scene, starts one. " +
                  "Useful for testing without going through the menu.")]
@@ -41,7 +42,8 @@ namespace AssemblyWorkshop.Telemetry
             isValid = Guard.Required(controller, nameof(controller), this)
                 & Guard.Required(graph, nameof(graph), this)
                 & Guard.Required(detector, nameof(detector), this)
-                & Guard.Required(snapper, nameof(snapper), this);
+                & Guard.Required(snapper, nameof(snapper), this)
+                & Guard.Required(helpTracker, nameof(helpTracker), this);
 
             if (!isValid)
             {
@@ -64,6 +66,7 @@ namespace AssemblyWorkshop.Telemetry
             detector.AttemptFailed += OnAttemptFailed;
             snapper.Undone += OnUndone;
             snapper.Detached += OnDetached;
+            helpTracker.HelpClosed += OnHelpClosed;
         }
 
         private void OnDisable()
@@ -81,6 +84,7 @@ namespace AssemblyWorkshop.Telemetry
             detector.AttemptFailed -= OnAttemptFailed;
             snapper.Undone -= OnUndone;
             snapper.Detached -= OnDetached;
+            helpTracker.HelpClosed -= OnHelpClosed;
 
             if (SessionManager.Instance != null)
             {
@@ -146,7 +150,8 @@ namespace AssemblyWorkshop.Telemetry
             {
                 furniture_id = furniture.FurnitureId,
                 pieces = graph.Pieces.Count,
-                joints = graph.TotalJoints
+                joints = graph.TotalJoints,
+                mobile = Application.isMobilePlatform
             });
         }
 
@@ -205,6 +210,15 @@ namespace AssemblyWorkshop.Telemetry
                     elapsed_seconds = Round(controller.ElapsedSeconds)
                 });
             }
+        }
+
+        private void OnHelpClosed(float duration)
+        {
+            Track("help_viewed", new
+            {
+                duration_seconds = Round(duration),
+                elapsed_seconds = Round(controller.ElapsedSeconds)
+            });
         }
 
         private void OnAssemblyRestarted(AssemblyResult result)
@@ -301,7 +315,9 @@ namespace AssemblyWorkshop.Telemetry
                 grabs = result.Grabs,
                 rotations = result.Rotations,
                 undos = result.Undos,
-                detaches = result.Detaches
+                detaches = result.Detaches,
+                help_requests = result.HelpRequests,
+                help_seconds = Round(result.HelpSeconds)
             };
         }
 

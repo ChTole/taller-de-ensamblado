@@ -9,14 +9,16 @@ using UnityEngine.InputSystem;
 namespace AssemblyWorkshop.Simulation
 {
     /// <summary>
-    /// Keyboard commands to take pieces apart: undo the last fit and remove the piece under the pointer.
-    /// They can also be called from UI buttons.
+    /// Commands to take pieces apart: undo the last fit and remove a piece.
+    /// On the keyboard, X removes the piece under the pointer. On touch screens, the buttons call
+    /// UndoLast and DetachSelected, which removes the last piece that was touched.
     /// </summary>
     [DisallowMultipleComponent]
     public class AssemblyCommands : MonoBehaviour
     {
         [SerializeField] private JointSnapper snapper;
         [SerializeField] private PieceDragger dragger;
+        [SerializeField] private PieceSelection selection;
 
         [Header("Actions")]
         [SerializeField] private InputActionReference undoAction;
@@ -33,6 +35,7 @@ namespace AssemblyWorkshop.Simulation
         {
             isValid = Guard.Required(snapper, nameof(snapper), this)
                 & Guard.Required(dragger, nameof(dragger), this)
+                & Guard.Required(selection, nameof(selection), this)
                 & InputGuard.Required(undoAction, nameof(undoAction), this)
                 & InputGuard.Required(detachAction, nameof(detachAction), this);
 
@@ -90,6 +93,23 @@ namespace AssemblyWorkshop.Simulation
         {
             if (!dragger.TryGetPieceUnderPointer(out AssemblyPiece piece, out _))
             {
+                return;
+            }
+
+            DetachResult result = snapper.TryDetach(piece);
+            if (result != DetachResult.Detached)
+            {
+                Refuse($"Detach '{piece.PieceId}'", result);
+            }
+        }
+
+        /// <summary>Removes the last piece that was touched, if it is still selected.</summary>
+        public void DetachSelected()
+        {
+            AssemblyPiece piece = selection.SelectedPiece;
+            if (piece == null)
+            {
+                Refuse("Detach selected", DetachResult.NotConnected);
                 return;
             }
 

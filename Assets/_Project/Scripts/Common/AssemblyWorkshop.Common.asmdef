@@ -1,7 +1,10 @@
 {
     "name": "AssemblyWorkshop.Common",
     "rootNamespace": "AssemblyWorkshop.Common",
-    "references": ["Unity.InputSystem"],
+    "references": [
+        "Unity.InputSystem",
+        "UnityEngine.UI"
+    ],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,

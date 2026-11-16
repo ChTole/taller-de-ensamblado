@@ -13,5 +13,7 @@ namespace AssemblyWorkshop.Simulation
         public int Rotations;
         public int Undos;
         public int Detaches;
+        public int HelpRequests;
+        public float HelpSeconds;
     }
 }

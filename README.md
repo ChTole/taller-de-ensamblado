@@ -10,8 +10,11 @@ Es un **modelo de referencia**, desarrollado sin supervisión de especialistas e
 
 - [ ] **Versión 1:** tres muebles, solo con encastres.
   - [x] Sistema de ensamblado: manipulación, encastres, deshacer y telemetría.
-  - [ ] Escenas: menú principal, simulación y resumen.
-  - [ ] Muebles:
+  - [ ] Escenas:
+    - [ ] Menú principal
+    - [x] Simulación: escritorio y móvil.
+    - [ ] Resumen.
+  - [x] Muebles:
     - [x] Mesa ratona (5 piezas): modelada e integrada.
     - [x] Taburete (9 piezas): modelado e integrado.
     - [x] Silla (10 piezas): modelada e integrada.

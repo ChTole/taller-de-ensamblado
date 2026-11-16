@@ -9,6 +9,7 @@ namespace AssemblyWorkshop.Interaction
     /// <summary>
     /// 90° rotations of the selected group, relative to the camera.
     /// Left/right: around the vertical axis. Forward/back: tip away from or toward the camera.
+    /// The public methods can be called from UI buttons, for touch screens.
     /// </summary>
     [DisallowMultipleComponent]
     public class PieceRotator : MonoBehaviour
@@ -58,6 +59,60 @@ namespace AssemblyWorkshop.Interaction
 
         private void Update()
         {
+            if (rotateLeftAction.action.WasPressedThisFrame())
+            {
+                RotateLeft();
+            }
+
+            if (rotateRightAction.action.WasPressedThisFrame())
+            {
+                RotateRight();
+            }
+
+            if (tiltForwardAction.action.WasPressedThisFrame())
+            {
+                TiltForward();
+            }
+
+            if (tiltBackAction.action.WasPressedThisFrame())
+            {
+                TiltBack();
+            }
+        }
+
+        public void RotateLeft()
+        {
+            Rotate(Vector3.up, -90f);
+        }
+
+        public void RotateRight()
+        {
+            Rotate(Vector3.up, 90f);
+        }
+
+        public void TiltForward()
+        {
+            Rotate(TiltAxis(), 90f);
+        }
+
+        public void TiltBack()
+        {
+            Rotate(TiltAxis(), -90f);
+        }
+
+        /// <summary>Horizontal axis of the camera, snapped to world X or Z so the rotation is exact.</summary>
+        private Vector3 TiltAxis()
+        {
+            return AxisAlignment.SnapToAxis(Vector3.ProjectOnPlane(viewCamera.transform.right, Vector3.up));
+        }
+
+        private void Rotate(Vector3 axis, float angle)
+        {
+            if (!isValid)
+            {
+                return;
+            }
+
             PieceGroup group = selection.Selected;
             if (group == null || group.IsLocked)
             {
@@ -68,28 +123,6 @@ namespace AssemblyWorkshop.Interaction
                 ? dragger.GrabPoint
                 : group.GetBounds().center;
 
-            if (rotateLeftAction.action.WasPressedThisFrame())
-            {
-                Rotate(group, Vector3.up, -90f, pivot);
-            }
-
-            if (rotateRightAction.action.WasPressedThisFrame())
-            {
-                Rotate(group, Vector3.up, 90f, pivot);
-            }
-
-            bool tiltForward = tiltForwardAction.action.WasPressedThisFrame();
-            if (tiltForward || tiltBackAction.action.WasPressedThisFrame())
-            {
-                // Horizontal axis of the camera, snapped to world X or Z so the rotation is exact
-                Vector3 tiltAxis = AxisAlignment.SnapToAxis(
-                    Vector3.ProjectOnPlane(viewCamera.transform.right, Vector3.up));
-                Rotate(group, tiltAxis, tiltForward ? 90f : -90f, pivot);
-            }
-        }
-
-        private void Rotate(PieceGroup group, Vector3 axis, float angle, Vector3 pivot)
-        {
             if (group.TryRotate(axis, angle, pivot))
             {
                 Rotated?.Invoke(group);

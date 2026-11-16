@@ -23,6 +23,7 @@ namespace AssemblyWorkshop.Simulation
         [SerializeField] private JointSnapper snapper;
         [SerializeField] private PieceDragger dragger;
         [SerializeField] private PieceRotator rotator;
+        [SerializeField] private HelpTracker helpTracker;
 
         [Header("Furniture")]
         [Tooltip("Object the furniture is instantiated under. Its rotation must be (0, 0, 0).")]
@@ -47,9 +48,15 @@ namespace AssemblyWorkshop.Simulation
         public event Action<AssemblyResult> AssemblyAbandoned;
 
         public FurnitureDefinition Furniture { get; private set; }
-        public float ElapsedSeconds => Furniture != null ? Time.time - startTime : 0f;
+
+        /// <summary>Whether the assembly is in progress: started and not yet checked or abandoned.</summary>
+        public bool IsRunning => isRunning;
+
+        /// <summary>Seconds since the assembly started. Stops counting when the assembly ends.</summary>
+        public float ElapsedSeconds => isRunning ? Time.time - startTime : finalElapsed;
 
         private float startTime;
+        private float finalElapsed;
         private bool isRunning;
         private bool isValid;
 
@@ -66,6 +73,7 @@ namespace AssemblyWorkshop.Simulation
                 & Guard.Required(snapper, nameof(snapper), this)
                 & Guard.Required(dragger, nameof(dragger), this)
                 & Guard.Required(rotator, nameof(rotator), this)
+                & Guard.Required(helpTracker, nameof(helpTracker), this)
                 & Guard.Required(furnitureParent, nameof(furnitureParent), this);
         }
 
@@ -143,7 +151,7 @@ namespace AssemblyWorkshop.Simulation
                 return;
             }
 
-            isRunning = false;
+            Stop();
             AssemblyRestarted?.Invoke(BuildResult(completed: graph.IsComplete));
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
@@ -153,7 +161,7 @@ namespace AssemblyWorkshop.Simulation
         {
             if (isRunning)
             {
-                isRunning = false;
+                Stop();
                 AssemblyResult result = BuildResult(completed: graph.IsComplete);
                 SimulationContext.LastResult = result;
                 AssemblyAbandoned?.Invoke(result);
@@ -173,11 +181,19 @@ namespace AssemblyWorkshop.Simulation
                 return;
             }
 
-            isRunning = false;
+            Stop();
             AssemblyResult result = BuildResult(completed: graph.IsComplete);
             SimulationContext.LastResult = result;
             AssemblyChecked?.Invoke(result);
             LoadScene(feedbackScene);
+        }
+
+        /// <summary>Freezes the elapsed time and closes the help if it is open.</summary>
+        private void Stop()
+        {
+            finalElapsed = Time.time - startTime;
+            isRunning = false;
+            helpTracker.Close();
         }
 
         private AssemblyResult BuildResult(bool completed)
@@ -193,7 +209,9 @@ namespace AssemblyWorkshop.Simulation
                 Grabs = grabs,
                 Rotations = rotations,
                 Undos = undos,
-                Detaches = detaches
+                Detaches = detaches,
+                HelpRequests = helpTracker.Requests,
+                HelpSeconds = helpTracker.TotalSeconds
             };
         }
 

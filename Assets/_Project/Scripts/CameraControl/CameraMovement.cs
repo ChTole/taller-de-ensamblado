@@ -2,12 +2,14 @@ using AssemblyWorkshop.Common;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.Controls;
 
 namespace AssemblyWorkshop.CameraControl
 {
     /// <summary>
     /// Orbit camera: always looks at the target and moves over a hemisphere around it.
-    /// Orbit: right button and drag. Zoom in or out: mouse wheel.
+    /// Mouse: right button and drag to orbit, wheel to zoom.
+    /// Touch: two fingers dragging to orbit, pinch to zoom.
     /// </summary>
     [DisallowMultipleComponent]
     public class CameraMovement : MonoBehaviour
@@ -34,6 +36,8 @@ namespace AssemblyWorkshop.CameraControl
         [Tooltip("Fraction of the distance that changes with each wheel step.")]
         [SerializeField, Range(0.01f, 0.5f)] private float zoomStep = 0.1f;
         [SerializeField] private bool invertVertical = false;
+        [Tooltip("Degrees the camera rotates per pixel of two-finger movement.")]
+        [SerializeField, Min(0f)] private float touchOrbitSensitivity = 0.15f;
 
         [Header("Smoothing")]
         [Tooltip("Higher values respond faster. At 0 there is no smoothing.")]
@@ -56,6 +60,10 @@ namespace AssemblyWorkshop.CameraControl
 
         private bool isOrbiting;
         private bool isValid;
+
+        // Two-finger gesture state
+        private float previousPinchDistance = -1f;
+        private bool isTouchGestureBlocked;
 
         private void Awake()
         {
@@ -96,11 +104,13 @@ namespace AssemblyWorkshop.CameraControl
             lookAction.action.Disable();
             zoomAction.action.Disable();
             isOrbiting = false;
+            previousPinchDistance = -1f;
         }
 
         private void LateUpdate()
         {
             ReadInput();
+            ReadTouchGestures();
             ApplyView(Time.deltaTime);
         }
 
@@ -151,6 +161,72 @@ namespace AssemblyWorkshop.CameraControl
                 goalDistance *= wheel > 0f ? 1f - zoomStep : 1f + zoomStep;
                 goalDistance = Mathf.Clamp(goalDistance, minDistance, maxDistance);
             }
+        }
+
+        /// <summary>Two fingers: their average movement orbits, and the change in their distance zooms.</summary>
+        private void ReadTouchGestures()
+        {
+            Touchscreen screen = Touchscreen.current;
+            TouchControl first = null;
+            TouchControl second = null;
+
+            if (screen != null)
+            {
+                foreach (TouchControl touch in screen.touches)
+                {
+                    if (!touch.isInProgress)
+                    {
+                        continue;
+                    }
+
+                    if (first == null)
+                    {
+                        first = touch;
+                    }
+                    else
+                    {
+                        second = touch;
+                        break;
+                    }
+                }
+            }
+
+            if (second == null)
+            {
+                previousPinchDistance = -1f;
+                isTouchGestureBlocked = false;
+                return;
+            }
+
+            Vector2 firstPosition = first.position.ReadValue();
+            Vector2 secondPosition = second.position.ReadValue();
+            float distance = Vector2.Distance(firstPosition, secondPosition);
+
+            // A gesture that starts on the UI is ignored until the fingers are lifted
+            if (previousPinchDistance < 0f)
+            {
+                isTouchGestureBlocked = PointerUtility.IsOverUI((firstPosition + secondPosition) * 0.5f);
+                previousPinchDistance = distance;
+                return;
+            }
+
+            if (isTouchGestureBlocked)
+            {
+                return;
+            }
+
+            Vector2 delta = (first.delta.ReadValue() + second.delta.ReadValue()) * 0.5f;
+            goalAngle += delta.x * touchOrbitSensitivity;
+            float vertical = delta.y * touchOrbitSensitivity;
+            goalElevation = Mathf.Clamp(goalElevation + (invertVertical ? vertical : -vertical), minElevation, maxElevation);
+
+            if (distance > 0f)
+            {
+                // Fingers apart: the distance shrinks and the camera gets closer
+                goalDistance = Mathf.Clamp(goalDistance * (previousPinchDistance / distance), minDistance, maxDistance);
+            }
+
+            previousPinchDistance = distance;
         }
 
         private void ApplyView(float deltaTime)

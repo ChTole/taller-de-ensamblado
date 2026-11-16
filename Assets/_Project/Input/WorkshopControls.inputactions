@@ -92,7 +92,7 @@
                 {
                     "name": "",
                     "id": "fb0fa7e3-0801-4d74-8c15-978c112deac4",
-                    "path": "<Mouse>/leftButton",
+                    "path": "<Pointer>/press",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -103,7 +103,7 @@
                 {
                     "name": "",
                     "id": "2ddd39a5-c618-4a87-983f-21ac2ac05702",
-                    "path": "<Mouse>/position",
+                    "path": "<Pointer>/position",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
