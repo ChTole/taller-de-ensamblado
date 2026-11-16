@@ -1,14 +1,14 @@
 ﻿<Solution>
+  <Project Path="AssemblyWorkshop.Telemetry.csproj" />
   <Project Path="AssemblyWorkshop.Pieces.csproj" />
   <Project Path="Assembly-CSharp-Editor.csproj" />
+  <Project Path="AssemblyWorkshop.UI.csproj" />
   <Project Path="AssemblyWorkshop.Simulation.csproj" />
   <Project Path="AssemblyWorkshop.Joints.csproj" />
   <Project Path="AssemblyWorkshop.CameraControl.csproj" />
   <Project Path="AssemblyWorkshop.Interaction.csproj" />
   <Project Path="AssemblyWorkshop.Common.csproj" />
-  <Project Path="AssemblyWorkshop.UI.csproj" />
   <Project Path="Assembly-CSharp.csproj" />
   <Project Path="AssemblyWorkshop.Editor.csproj" />
-  <Project Path="AssemblyWorkshop.Telemetry.csproj" />
   <Project Path="AssemblyWorkshop.Feedback.csproj" />
 </Solution>

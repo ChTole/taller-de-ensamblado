@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: LivingRoomTableFurniture
   m_EditorClassIdentifier: AssemblyWorkshop.Simulation::AssemblyWorkshop.Simulation.FurnitureDefinition
   furnitureId: living_room_table
-  displayName: Mesa de living
+  displayName: Mesa ratona
   difficulty: 1
-  description: 
+  description: 'Mesa ratona: 5 piezas y 4 uniones. Ideal para aprender los controles.'
   thumbnail: {fileID: 21300000, guid: 36c4f0f11023f5cc6bd48558845c0b45, type: 3}
   piecesPrefab: {fileID: 6086402569276630062, guid: 2ccb5d8257a235c08a910d3ec3526d3f, type: 3}

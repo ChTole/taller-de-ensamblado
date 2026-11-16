@@ -11,7 +11,7 @@ Es un **modelo de referencia**, desarrollado sin supervisión de especialistas e
 - [ ] **Versión 1:** tres muebles, solo con encastres.
   - [x] Sistema de ensamblado: manipulación, encastres, deshacer y telemetría.
   - [ ] Escenas:
-    - [ ] Menú principal
+    - [x] Menú principal
     - [x] Simulación: escritorio y móvil.
     - [ ] Resumen.
   - [x] Muebles:

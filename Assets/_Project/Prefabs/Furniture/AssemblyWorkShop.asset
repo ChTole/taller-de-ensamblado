@@ -14,3 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: AssemblyWorkshop.Simulation::AssemblyWorkshop.Simulation.FurnitureCatalog
   furniture:
   - {fileID: 11400000, guid: 5422f4721e165b963bfc11ad202f24e1, type: 2}
+  - {fileID: 11400000, guid: 97e68c7c04f0e2212b5f5f35916b7ffc, type: 2}
+  - {fileID: 11400000, guid: 75f4ddfb13a3da32286f2f6e27166a61, type: 2}

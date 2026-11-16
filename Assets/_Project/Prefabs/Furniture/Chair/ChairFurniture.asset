@@ -15,6 +15,6 @@ MonoBehaviour:
   furnitureId: chair
   displayName: Silla
   difficulty: 3
-  description: 
+  description: 'Silla: 10 piezas y 12 uniones. Hay piezas parecidas que no son intercambiables.'
   thumbnail: {fileID: 21300000, guid: dd8604fe63cdcfc6d979c793f864cf2b, type: 3}
   piecesPrefab: {fileID: 3028553808513467669, guid: 0d0c3578053cd23c0a12e1e12b05c027, type: 3}

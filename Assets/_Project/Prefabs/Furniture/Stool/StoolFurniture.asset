@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: StoolFurniture
   m_EditorClassIdentifier: AssemblyWorkshop.Simulation::AssemblyWorkshop.Simulation.FurnitureDefinition
   furnitureId: stool
-  displayName: Stool
+  displayName: Taburete
   difficulty: 2
-  description: 
+  description: 'Taburete: 9 piezas y 10 uniones. El orden de armado importa.'
   thumbnail: {fileID: 21300000, guid: c2796ba94067191ac9276e5c9cb1da93, type: 3}
   piecesPrefab: {fileID: 2367090934462523050, guid: 5ac4500e187429c0d8bd604b7440519e, type: 3}

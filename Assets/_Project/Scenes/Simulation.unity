@@ -1841,7 +1841,7 @@ MonoBehaviour:
   rotator: {fileID: 1277343894}
   helpTracker: {fileID: 1254205410}
   furnitureParent: {fileID: 88959480}
-  editorFallback: {fileID: 11400000, guid: 5422f4721e165b963bfc11ad202f24e1, type: 2}
+  editorFallback: {fileID: 0}
   feedbackScene: Feedback
   menuScene: MainMenu
 --- !u!114 &1254205408
