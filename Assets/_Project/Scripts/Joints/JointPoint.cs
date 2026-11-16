@@ -44,6 +44,10 @@ namespace AssemblyWorkshop.Joints
         [Tooltip("Optional. If not empty, the joint is only accepted with these points.")]
         [SerializeField] private List<JointPoint> allowedPartners = new List<JointPoint>();
 
+        [Tooltip("Optional. Points this one should be joined to according to the design. " +
+                 "A joint with any other compatible point still fits, but counts as incorrect. Empty: any partner is correct.")]
+        [SerializeField] private List<JointPoint> expectedPartners = new List<JointPoint>();
+
         public string JointId
         {
             get
@@ -97,6 +101,20 @@ namespace AssemblyWorkshop.Joints
             return AllowsPartner(other) && other.AllowsPartner(this);
         }
 
+        /// <summary>
+        /// Whether a joint with the other point is the one the design expects.
+        /// Both sides are checked: if either lists expected partners, the other must be among them.
+        /// </summary>
+        public bool IsExpectedPartner(JointPoint other)
+        {
+            return other != null && ExpectsPartner(other) && other.ExpectsPartner(this);
+        }
+
+        private bool ExpectsPartner(JointPoint other)
+        {
+            return expectedPartners.Count == 0 || expectedPartners.Contains(other);
+        }
+
         private bool AllowsPartner(JointPoint other)
         {
             return allowedPartners.Count == 0 || allowedPartners.Contains(other);
@@ -119,6 +137,14 @@ namespace AssemblyWorkshop.Joints
                 if (partner != null && partner.kind == kind)
                 {
                     Guard.Warning(this, $"'{name}': '{partner.name}' in 'Allowed Partners' is of the same kind and will never fit.");
+                }
+            }
+
+            foreach (JointPoint partner in expectedPartners)
+            {
+                if (partner != null && partner.kind == kind)
+                {
+                    Guard.Warning(this, $"'{name}': '{partner.name}' in 'Expected Partners' is of the same kind and can never be joined.");
                 }
             }
         }

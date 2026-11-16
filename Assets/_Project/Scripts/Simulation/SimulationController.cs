@@ -205,6 +205,7 @@ namespace AssemblyWorkshop.Simulation
                 DurationSeconds = ElapsedSeconds,
                 JointsCompleted = graph.Connections.Count,
                 JointsTotal = graph.TotalJoints,
+                IncorrectJoints = CountIncorrectJoints(),
                 FailedAttempts = failedAttempts,
                 Grabs = grabs,
                 Rotations = rotations,
@@ -213,6 +214,20 @@ namespace AssemblyWorkshop.Simulation
                 HelpRequests = helpTracker.Requests,
                 HelpSeconds = helpTracker.TotalSeconds
             };
+        }
+
+        private int CountIncorrectJoints()
+        {
+            int incorrect = 0;
+            foreach (JointPair pair in graph.Connections)
+            {
+                if (!pair.Tenon.IsExpectedPartner(pair.Mortise))
+                {
+                    incorrect++;
+                }
+            }
+
+            return incorrect;
         }
 
         private void OnAttemptFailed(JointFailure failure) => failedAttempts++;

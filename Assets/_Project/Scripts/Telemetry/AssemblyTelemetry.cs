@@ -163,6 +163,7 @@ namespace AssemblyWorkshop.Telemetry
             {
                 tenon = pair.Tenon.JointId,
                 mortise = pair.Mortise.JointId,
+                expected = pair.Tenon.IsExpectedPartner(pair.Mortise),
                 elapsed_seconds = Round(controller.ElapsedSeconds),
                 previous_failures = previousFailures
             });
@@ -311,6 +312,8 @@ namespace AssemblyWorkshop.Telemetry
                 duration_seconds = Round(result.DurationSeconds),
                 joints_completed = result.JointsCompleted,
                 joints_total = result.JointsTotal,
+                incorrect_joints = result.IncorrectJoints,
+                correct = result.IsCorrect,
                 failed_attempts = result.FailedAttempts,
                 grabs = result.Grabs,
                 rotations = result.Rotations,
