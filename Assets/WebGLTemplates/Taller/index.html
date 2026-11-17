@@ -22,6 +22,12 @@
     <meta property="og:image:alt" content="Taller de Ensamblado: una mesa ratona, un taburete y una silla de madera armados con encastres.">
     <meta name="twitter:card" content="summary_large_image">
 
+    <link rel="manifest" href="manifest.webmanifest">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-title" content="Taller">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
     <link rel="stylesheet" href="style.css">
   </head>
   <body>
@@ -39,6 +45,12 @@
     <div id="rotate-hint" aria-hidden="true">
       <p>Girá el dispositivo para usar la simulación.</p>
     </div>
+
+    <button id="fullscreen-button" type="button" aria-label="Pantalla completa" hidden>
+      <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
+        <path d="M4 9V4h5M15 4h5v5M20 15v5h-5M9 20H4v-5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </button>
 
     <noscript>
       <div class="noscript">
@@ -105,6 +117,35 @@
         progressText.textContent = "No se pudo cargar la simulación.";
       };
       document.body.appendChild(script);
+
+      // Fullscreen button: only on touch screens whose browser supports it (not on iPhone)
+      var fullscreenButton = document.querySelector("#fullscreen-button");
+      var root = document.documentElement;
+      var requestFullscreen = root.requestFullscreen || root.webkitRequestFullscreen;
+      var isTouch = window.matchMedia("(pointer: coarse)").matches;
+
+      function isFullscreen() {
+        return !!(document.fullscreenElement || document.webkitFullscreenElement);
+      }
+
+      function updateFullscreenButton() {
+        fullscreenButton.hidden = !requestFullscreen || !isTouch || isFullscreen();
+      }
+
+      fullscreenButton.addEventListener("click", function () {
+        Promise.resolve(requestFullscreen.call(root)).then(function () {
+          // In fullscreen, Android also allows locking the orientation
+          if (screen.orientation && screen.orientation.lock) {
+            return screen.orientation.lock("landscape");
+          }
+        }).catch(function () {
+          // Not supported or rejected by the browser: the page keeps working as it is
+        });
+      });
+
+      document.addEventListener("fullscreenchange", updateFullscreenButton);
+      document.addEventListener("webkitfullscreenchange", updateFullscreenButton);
+      updateFullscreenButton();
     </script>
   </body>
 </html>

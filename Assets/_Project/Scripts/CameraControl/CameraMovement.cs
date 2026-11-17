@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using AssemblyWorkshop.Common;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -62,8 +63,8 @@ namespace AssemblyWorkshop.CameraControl
         private bool isValid;
 
         // Two-finger gesture state
+        private readonly List<TouchControl> sceneTouches = new List<TouchControl>();
         private float previousPinchDistance = -1f;
-        private bool isTouchGestureBlocked;
 
         private void Awake()
         {
@@ -163,55 +164,27 @@ namespace AssemblyWorkshop.CameraControl
             }
         }
 
-        /// <summary>Two fingers: their average movement orbits, and the change in their distance zooms.</summary>
+        /// <summary>
+        /// Two fingers on the scene: their average movement orbits, and the change in their distance zooms.
+        /// Fingers that started on the UI are ignored.
+        /// </summary>
         private void ReadTouchGestures()
         {
-            Touchscreen screen = Touchscreen.current;
-            TouchControl first = null;
-            TouchControl second = null;
-
-            if (screen != null)
-            {
-                foreach (TouchControl touch in screen.touches)
-                {
-                    if (!touch.isInProgress)
-                    {
-                        continue;
-                    }
-
-                    if (first == null)
-                    {
-                        first = touch;
-                    }
-                    else
-                    {
-                        second = touch;
-                        break;
-                    }
-                }
-            }
-
-            if (second == null)
+            if (PointerUtility.GetSceneTouches(sceneTouches) < 2)
             {
                 previousPinchDistance = -1f;
-                isTouchGestureBlocked = false;
                 return;
             }
 
+            TouchControl first = sceneTouches[0];
+            TouchControl second = sceneTouches[1];
             Vector2 firstPosition = first.position.ReadValue();
             Vector2 secondPosition = second.position.ReadValue();
             float distance = Vector2.Distance(firstPosition, secondPosition);
 
-            // A gesture that starts on the UI is ignored until the fingers are lifted
             if (previousPinchDistance < 0f)
             {
-                isTouchGestureBlocked = PointerUtility.IsOverUI((firstPosition + secondPosition) * 0.5f);
                 previousPinchDistance = distance;
-                return;
-            }
-
-            if (isTouchGestureBlocked)
-            {
                 return;
             }
 

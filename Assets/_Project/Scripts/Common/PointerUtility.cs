@@ -39,9 +39,22 @@ namespace AssemblyWorkshop.Common
             return Results.Count > 0;
         }
 
-        /// <summary>Number of fingers currently touching the screen. 0 when there is no touchscreen.</summary>
-        public static int ActiveTouchCount()
+        /// <summary>
+        /// Number of fingers currently touching the scene. Fingers that started on the UI are not counted,
+        /// so holding a piece with one finger and pressing a button with another is not a two-finger gesture.
+        /// </summary>
+        public static int SceneTouchCount()
         {
+            return GetSceneTouches(null);
+        }
+
+        /// <summary>
+        /// Fills 'touches' (if not null) with the fingers touching the scene, in order, and returns how many there are.
+        /// </summary>
+        public static int GetSceneTouches(List<TouchControl> touches)
+        {
+            touches?.Clear();
+
             Touchscreen screen = Touchscreen.current;
             if (screen == null)
             {
@@ -51,10 +64,14 @@ namespace AssemblyWorkshop.Common
             int count = 0;
             foreach (TouchControl touch in screen.touches)
             {
-                if (touch.isInProgress)
+                // The start position decides it: a finger that began on a button stays a UI finger while it moves
+                if (!touch.isInProgress || IsOverUI(touch.startPosition.ReadValue()))
                 {
-                    count++;
+                    continue;
                 }
+
+                touches?.Add(touch);
+                count++;
             }
 
             return count;

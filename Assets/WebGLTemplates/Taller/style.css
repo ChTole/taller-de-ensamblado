@@ -138,3 +138,24 @@ body {
     display: flex;
   }
 }
+
+#fullscreen-button {
+  position: fixed;
+  top: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border: none;
+  border-radius: 8px;
+  background: rgba(43, 74, 87, 0.85);
+  color: #FFFFFF;
+}
+
+#fullscreen-button[hidden] {
+  display: none;
+}

@@ -9,7 +9,7 @@ namespace AssemblyWorkshop.Interaction
     /// <summary>
     /// Grabs, drags and releases groups of pieces, with mouse or touch.
     /// Drag: move across the surface. With vertical mode (Shift, or the touch toggle): move up or down.
-    /// Pieces never go through or push each other. Two-finger gestures are left to the camera.
+    /// Pieces never go through or push each other. Two-finger gestures on the scene are left to the camera.
     /// </summary>
     [DisallowMultipleComponent]
     public class PieceDragger : MonoBehaviour
@@ -105,8 +105,9 @@ namespace AssemblyWorkshop.Interaction
 
         private void Update()
         {
-            // Two or more fingers are a camera gesture
-            if (PointerUtility.ActiveTouchCount() >= 2)
+            // Two or more fingers on the scene are a camera gesture.
+            // A finger on a button (such as the vertical mode toggle) does not count, so the piece stays held.
+            if (PointerUtility.SceneTouchCount() >= 2)
             {
                 pendingDeselect = false;
                 if (dragged != null)
