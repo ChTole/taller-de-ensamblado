@@ -118,7 +118,7 @@ namespace AssemblyWorkshop.Interaction
                 return;
             }
 
-            Vector2 pointer = pointAction.action.ReadValue<Vector2>();
+            Vector2 pointer = ReadPointerPosition();
 
             if (grabAction.action.WasPressedThisFrame())
             {
@@ -158,7 +158,23 @@ namespace AssemblyWorkshop.Interaction
         /// <summary>Piece under the pointer, if any and not covered by the UI.</summary>
         public bool TryGetPieceUnderPointer(out AssemblyPiece piece, out RaycastHit hit)
         {
-            return TryGetPieceAt(pointAction.action.ReadValue<Vector2>(), out piece, out hit);
+            return TryGetPieceAt(ReadPointerPosition(), out piece, out hit);
+        }
+
+        /// <summary>
+        /// Pointer position in screen pixels. While a finger is down, the touch position is read directly:
+        /// browsers also send emulated mouse events for each touch, and on high-density screens those can
+        /// arrive with a different pixel scale, so the combined pointer position would jump between both.
+        /// </summary>
+        private Vector2 ReadPointerPosition()
+        {
+            Touchscreen screen = Touchscreen.current;
+            if (screen != null && screen.primaryTouch.press.isPressed)
+            {
+                return screen.primaryTouch.position.ReadValue();
+            }
+
+            return pointAction.action.ReadValue<Vector2>();
         }
 
         private bool TryGetPieceAt(Vector2 screenPosition, out AssemblyPiece piece, out RaycastHit hit)
