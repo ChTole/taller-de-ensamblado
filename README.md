@@ -21,6 +21,7 @@ Es un **modelo de referencia**, desarrollado sin supervisión de especialistas e
     - [x] Taburete (9 piezas): modelado e integrado.
     - [x] Silla (10 piezas): modelada e integrada.
   - [x] Publicación web.
+- [x] **Versión 1.1:** vista de controles en la simulación e interfaz rediseñada para celulares.
 - [ ] **Versión 2:** los mismos muebles, con uniones atornilladas.
 
 ## Cómo se juega
