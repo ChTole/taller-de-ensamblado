@@ -21,5 +21,9 @@ namespace AssemblyWorkshop.Simulation
         public int Detaches;
         public int HelpRequests;
         public float HelpSeconds;
+
+        /// <summary>Times the controls were consulted during the simulation. Informational, not evaluated.</summary>
+        public int ControlsViews;
+        public float ControlsSeconds;
     }
 }

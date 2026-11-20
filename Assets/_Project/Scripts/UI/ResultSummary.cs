@@ -14,7 +14,8 @@ namespace AssemblyWorkshop.UI
     {
         [SerializeField] private TMP_Text summaryText;
 
-        [Tooltip("Placeholders: {furniture}, {status}, {resolution}, {joints}, {total}, {failed}, {helpCount}, {helpTime}, {time}.")]
+        [Tooltip("Placeholders: {furniture}, {status}, {resolution}, {joints}, {total}, {failed}, {helpCount}, {helpTime}, " +
+                 "{controlsCount}, {controlsTime}, {time}.")]
         [SerializeField, TextArea(6, 12)] private string template =
             "<b>Mueble:</b> {furniture}\n" +
             "<b>Estado:</b> {status}\n" +
@@ -63,6 +64,8 @@ namespace AssemblyWorkshop.UI
                 .Replace("{failed}", result.FailedAttempts.ToString())
                 .Replace("{helpCount}", result.HelpRequests.ToString())
                 .Replace("{helpTime}", FormatTime(result.HelpSeconds))
+                .Replace("{controlsCount}", result.ControlsViews.ToString())
+                .Replace("{controlsTime}", FormatTime(result.ControlsSeconds))
                 .Replace("{time}", FormatTime(result.DurationSeconds));
         }
 

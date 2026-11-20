@@ -49,7 +49,7 @@ namespace AssemblyWorkshop.UI
         {
             if (isValid)
             {
-                tracker.HelpClosed += OnHelpClosed;
+                tracker.Closed += OnHelpClosed;
             }
         }
 
@@ -60,7 +60,7 @@ namespace AssemblyWorkshop.UI
                 return;
             }
 
-            tracker.HelpClosed -= OnHelpClosed;
+            tracker.Closed -= OnHelpClosed;
             tracker.Close();
         }
 

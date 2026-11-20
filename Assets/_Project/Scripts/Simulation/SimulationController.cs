@@ -25,6 +25,9 @@ namespace AssemblyWorkshop.Simulation
         [SerializeField] private PieceRotator rotator;
         [SerializeField] private HelpTracker helpTracker;
 
+        [Tooltip("Optional. Measures how the controls are consulted during the simulation.")]
+        [SerializeField] private ControlsTracker controlsTracker;
+
         [Header("Furniture")]
         [Tooltip("Object the furniture is instantiated under. Its rotation must be (0, 0, 0).")]
         [SerializeField] private Transform furnitureParent;
@@ -188,12 +191,17 @@ namespace AssemblyWorkshop.Simulation
             LoadScene(feedbackScene);
         }
 
-        /// <summary>Freezes the elapsed time and closes the help if it is open.</summary>
+        /// <summary>Freezes the elapsed time and closes the help and the controls if they are open.</summary>
         private void Stop()
         {
             finalElapsed = Time.time - startTime;
             isRunning = false;
             helpTracker.Close();
+
+            if (controlsTracker != null)
+            {
+                controlsTracker.Close();
+            }
         }
 
         private AssemblyResult BuildResult(bool completed)
@@ -212,7 +220,9 @@ namespace AssemblyWorkshop.Simulation
                 Undos = undos,
                 Detaches = detaches,
                 HelpRequests = helpTracker.Requests,
-                HelpSeconds = helpTracker.TotalSeconds
+                HelpSeconds = helpTracker.TotalSeconds,
+                ControlsViews = controlsTracker != null ? controlsTracker.Requests : 0,
+                ControlsSeconds = controlsTracker != null ? controlsTracker.TotalSeconds : 0f
             };
         }
 

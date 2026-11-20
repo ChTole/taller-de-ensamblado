@@ -23,6 +23,9 @@ namespace AssemblyWorkshop.Telemetry
         [SerializeField] private JointSnapper snapper;
         [SerializeField] private HelpTracker helpTracker;
 
+        [Tooltip("Optional. Records each time the controls are consulted.")]
+        [SerializeField] private ControlsTracker controlsTracker;
+
         [Tooltip("Editor only: if there is no active session when entering Play Mode in this scene, starts one. " +
                  "Useful for testing without going through the menu.")]
         [SerializeField] private bool startSessionInEditor = true;
@@ -66,7 +69,11 @@ namespace AssemblyWorkshop.Telemetry
             detector.AttemptFailed += OnAttemptFailed;
             snapper.Undone += OnUndone;
             snapper.Detached += OnDetached;
-            helpTracker.HelpClosed += OnHelpClosed;
+            helpTracker.Closed += OnHelpClosed;
+            if (controlsTracker != null)
+            {
+                controlsTracker.Closed += OnControlsClosed;
+            }
         }
 
         private void OnDisable()
@@ -84,7 +91,11 @@ namespace AssemblyWorkshop.Telemetry
             detector.AttemptFailed -= OnAttemptFailed;
             snapper.Undone -= OnUndone;
             snapper.Detached -= OnDetached;
-            helpTracker.HelpClosed -= OnHelpClosed;
+            helpTracker.Closed -= OnHelpClosed;
+            if (controlsTracker != null)
+            {
+                controlsTracker.Closed -= OnControlsClosed;
+            }
 
             if (SessionManager.Instance != null)
             {
@@ -222,6 +233,15 @@ namespace AssemblyWorkshop.Telemetry
             });
         }
 
+        private void OnControlsClosed(float duration)
+        {
+            Track("controls_viewed", new
+            {
+                duration_seconds = Round(duration),
+                elapsed_seconds = Round(controller.ElapsedSeconds)
+            });
+        }
+
         private void OnAssemblyRestarted(AssemblyResult result)
         {
             // The session continues: restarting the assembly is part of the learning process
@@ -320,7 +340,9 @@ namespace AssemblyWorkshop.Telemetry
                 undos = result.Undos,
                 detaches = result.Detaches,
                 help_requests = result.HelpRequests,
-                help_seconds = Round(result.HelpSeconds)
+                help_seconds = Round(result.HelpSeconds),
+                controls_views = result.ControlsViews,
+                controls_seconds = Round(result.ControlsSeconds)
             };
         }
 
