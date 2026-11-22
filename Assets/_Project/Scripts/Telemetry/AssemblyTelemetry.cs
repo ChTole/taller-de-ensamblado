@@ -160,6 +160,7 @@ namespace AssemblyWorkshop.Telemetry
             Track("assembly_started", new
             {
                 furniture_id = furniture.FurnitureId,
+                app_version = Application.version,
                 pieces = graph.Pieces.Count,
                 joints = graph.TotalJoints,
                 mobile = Application.isMobilePlatform
