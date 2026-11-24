@@ -22,6 +22,7 @@ Es un **modelo de referencia**, desarrollado sin supervisión de especialistas e
     - [x] Silla (10 piezas): modelada e integrada.
   - [x] Publicación web.
 - [x] **Versión 1.1:** vista de controles en la simulación e interfaz rediseñada para celulares.
+  - [x] Conexión con [Bitácora API](https://github.com/ChTole/bitacora-api): la versión publicada registra cada sesión en el servidor.
 - [ ] **Versión 2:** los mismos muebles, con uniones atornilladas.
 
 ## Cómo se juega
@@ -58,6 +59,25 @@ Para compilar: **File → Build Profiles → Web**, con las escenas `MainMenu`, 
 ## Dependencias
 
 [Bitácora](https://github.com/ChTole/bitacora) registra las sesiones y los eventos del armado. Está declarada en `Packages/manifest.json` con una versión fija, así que se instala automáticamente al abrir el proyecto. Por defecto usa el backend simulado: funciona sin servidor y muestra en la consola los eventos que enviaría.
+
+## Configuración de la API
+
+La versión publicada envía la telemetría a [Bitácora API](https://github.com/ChTole/bitacora-api). Esa configuración no se versiona: el repositorio queda con el backend simulado, para que cualquiera pueda abrirlo y probarlo sin servidor.
+
+Para compilar la versión publicada, en el asset `BitacoraConfig`:
+
+| Campo | Valor |
+|---|---|
+| `Backend` | `Http` |
+| `Api Base Url` | La URL del servidor, sin barra final |
+| `Api Key` | La clave de la simulación `taller-ensamblado`, que se genera en el admin del servidor |
+| `Simulation Id` | `taller-ensamblado` |
+
+Después de compilar, descartar los cambios del asset con `git restore`.
+
+La clave queda visible en la build publicada, como cualquier configuración de una aplicación web. El servidor la limita a crear sesiones y registrar eventos de esta simulación, y solo acepta solicitudes desde el dominio de la demo.
+
+**Arranque del servidor.** El servidor se apaga después de un rato sin uso y tarda alrededor de un minuto en volver. La plantilla `Assets/WebGLTemplates/Taller` lo despierta apenas carga la página, con una solicitud a `/healthz`, para que esté activo cuando la persona presione **Comenzar**. Si cambia la URL del servidor, hay que actualizarla también en el `index.html` de la plantilla.
 
 ## Licencia
 
