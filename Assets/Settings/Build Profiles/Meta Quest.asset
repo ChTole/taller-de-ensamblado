@@ -34,8 +34,14 @@ MonoBehaviour:
   m_PlatformId: 80657fe557de4d17822398b3a01b8c9e
   m_PlatformBuildProfile:
     rid: 6761329686794469438
-  m_OverrideGlobalSceneList: 0
-  m_Scenes: []
+  m_OverrideGlobalSceneList: 1
+  m_Scenes:
+  - m_enabled: 1
+    m_path: Assets/_Project/Scenes/XR/MainMenuXR.unity
+  - m_enabled: 1
+    m_path: Assets/_Project/Scenes/XR/SimulationXR.unity
+  - m_enabled: 1
+    m_path: Assets/_Project/Scenes/XR/FeedbackXR.unity
   m_HasScriptingDefines: 0
   m_ScriptingDefines: []
   m_PlayerSettingsYaml:
@@ -190,10 +196,6 @@ MonoBehaviour:
         type: 3}'
     - line: '|   - {fileID: 11400000, guid: d5a4edc6f23875e428842f09c71315d8, type:
         2}'
-    - line: '|   - {fileID: 4710507945667846122, guid: de8cc68be3d6c09449ce73f124494272,
-        type: 2}'
-    - line: '|   - {fileID: 2031256107778987136, guid: 4aed4e17bc9889b4f99892580fa3f26c,
-        type: 2}'
     - line: '|   metroInputSource: 0'
     - line: '|   wsaTransparentSwapchain: 0'
     - line: '|   m_HolographicPauseOnTrackingLoss: 1'

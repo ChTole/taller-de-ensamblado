@@ -48,7 +48,6 @@ namespace AssemblyWorkshop.Joints
 
         // A through mortise has two entries
         private readonly Entry[] entries = new Entry[2];
-        private PieceGroup trackedGroup;
 
         private void Awake()
         {
@@ -58,16 +57,27 @@ namespace AssemblyWorkshop.Joints
             }
         }
 
+        private void OnEnable()
+        {
+            if (graph != null)
+            {
+                graph.GroupReleased += HandleRelease;
+            }
+        }
+
+        private void OnDisable()
+        {
+            if (graph != null)
+            {
+                graph.GroupReleased -= HandleRelease;
+            }
+        }
+
         private void Update()
         {
+            // Only the candidate for the highlight is polled. The release is handled by the event,
+            // at the exact pose where the piece was released, before it starts settling or falling.
             PieceGroup held = graph.FindHeldGroup();
-
-            if (trackedGroup != null && trackedGroup != held)
-            {
-                HandleRelease(trackedGroup);
-            }
-
-            trackedGroup = held;
             SetCurrent(held != null ? FindMatch(held) : null);
         }
 

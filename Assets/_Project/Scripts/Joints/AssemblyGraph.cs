@@ -19,6 +19,11 @@ namespace AssemblyWorkshop.Joints
         public event Action<JointPair> JointDisconnected;
         public event Action AssemblyCompleted;
 
+        /// <summary>
+        /// A group was released, raised at the exact moment of release, before it starts settling or falling.
+        /// </summary>
+        public event Action<PieceGroup> GroupReleased;
+
         public WorkArea WorkArea => workArea;
         public IReadOnlyList<AssemblyPiece> Pieces => pieces;
         public IReadOnlyList<JointPoint> Joints => joints;
@@ -108,7 +113,7 @@ namespace AssemblyWorkshop.Joints
             groupsParent = furnitureRoot.transform;
             foreach (AssemblyPiece piece in pieces)
             {
-                groups.Add(PieceGroup.Create(new[] { piece }, groupsParent, workArea));
+                AddGroup(PieceGroup.Create(new[] { piece }, groupsParent, workArea));
             }
 
             return true;
@@ -282,12 +287,11 @@ namespace AssemblyWorkshop.Joints
                 members.AddRange(group.Pieces);
             }
 
-            PieceGroup merged = PieceGroup.Create(members, groupsParent, workArea);
-            groups.Add(merged);
+            PieceGroup merged = AddGroup(PieceGroup.Create(members, groupsParent, workArea));
 
             foreach (PieceGroup group in involved)
             {
-                groups.Remove(group);
+                RemoveGroup(group);
                 group.Dissolve(merged);
             }
         }
@@ -309,13 +313,31 @@ namespace AssemblyWorkshop.Joints
                 return;
             }
 
-            groups.Remove(group);
+            RemoveGroup(group);
             foreach (HashSet<AssemblyPiece> part in parts)
             {
-                groups.Add(PieceGroup.Create(part, groupsParent, workArea));
+                AddGroup(PieceGroup.Create(part, groupsParent, workArea));
             }
 
             group.Dissolve(null);
+        }
+
+        private PieceGroup AddGroup(PieceGroup group)
+        {
+            groups.Add(group);
+            group.Released += OnGroupReleased;
+            return group;
+        }
+
+        private void RemoveGroup(PieceGroup group)
+        {
+            groups.Remove(group);
+            group.Released -= OnGroupReleased;
+        }
+
+        private void OnGroupReleased(PieceGroup group)
+        {
+            GroupReleased?.Invoke(group);
         }
 
         private static void AddDistinct(List<PieceGroup> list, PieceGroup group)
