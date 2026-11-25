@@ -67,5 +67,5 @@
         "*.sln": "*.csproj",
         "*.slnx": "*.csproj"
     },
-    "dotnet.defaultSolution": "TallerDeEnsamblado.slnx"
+    "dotnet.defaultSolution": "taller-de-ensamblado.slnx"
 }

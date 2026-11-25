@@ -8,15 +8,20 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/SampleScene.unity
     guid: 99c9720ab356a0642a771bea13969a05
-  - enabled: 1
+  - enabled: 0
     path: Assets/_Project/Scenes/MainMenu.unity
     guid: ed46a60c60b04620d8a08a4fe4ddad21
-  - enabled: 1
+  - enabled: 0
     path: Assets/_Project/Scenes/Simulation.unity
     guid: 3c6f9d5a3ccb8256eac4b8306d981c61
-  - enabled: 1
+  - enabled: 0
     path: Assets/_Project/Scenes/Feedback.unity
     guid: 021a1c4003f8e448db3ea6866dd3a17b
+  - enabled: 1
+    path: Assets/_Project/Scenes/Testing/MetaSDKTest.unity
+    guid: d106061cfb65bd543956542313ff8d34
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+    com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 4aed4e17bc9889b4f99892580fa3f26c, type: 2}
+    com.unity.xr.openxr.settings4: {fileID: 11400000, guid: de8cc68be3d6c09449ce73f124494272, type: 2}
   m_UseUCBPForAssetBundles: 0
