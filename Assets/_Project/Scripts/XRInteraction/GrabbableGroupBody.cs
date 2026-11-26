@@ -31,6 +31,10 @@ namespace AssemblyWorkshop.XRInteraction
 
         // Hands or controllers currently holding the group
         private readonly HashSet<int> holders = new HashSet<int>();
+
+        /// <summary>The piece closest to where the group was last grabbed. Commands such as "detach" act on it.</summary>
+        public AssemblyPiece GrabbedPiece { get; private set; }
+
         private Rigidbody body;
         private PieceGroup group;
         private bool isValid;
@@ -86,6 +90,7 @@ namespace AssemblyWorkshop.XRInteraction
                 case PointerEventType.Select:
                     if (holders.Add(evt.Identifier) && holders.Count == 1)
                     {
+                        GrabbedPiece = FindClosestPiece(evt.Pose.position);
                         group.BeginHold();
                     }
 
@@ -102,6 +107,27 @@ namespace AssemblyWorkshop.XRInteraction
 
                     break;
             }
+        }
+
+        private AssemblyPiece FindClosestPiece(Vector3 point)
+        {
+            AssemblyPiece closest = null;
+            float bestDistance = float.MaxValue;
+
+            foreach (AssemblyPiece piece in group.Pieces)
+            {
+                foreach (BoxCollider box in piece.Colliders)
+                {
+                    float distance = (box.ClosestPoint(point) - point).sqrMagnitude;
+                    if (distance < bestDistance)
+                    {
+                        bestDistance = distance;
+                        closest = piece;
+                    }
+                }
+            }
+
+            return closest;
         }
 
         private void FixedUpdate()

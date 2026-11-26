@@ -4,7 +4,9 @@
     "references": [
         "AssemblyWorkshop.Common",
         "AssemblyWorkshop.Pieces",
-        "Oculus.Interaction"
+        "AssemblyWorkshop.Joints",
+        "Oculus.Interaction",
+        "Oculus.VR"
     ],
     "includePlatforms": ["Android", "Editor"],
     "excludePlatforms": [],

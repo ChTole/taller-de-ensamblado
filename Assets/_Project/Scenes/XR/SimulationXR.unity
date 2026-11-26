@@ -3415,6 +3415,7 @@ GameObject:
   - component: {fileID: 365829339}
   - component: {fileID: 365829340}
   - component: {fileID: 365829338}
+  - component: {fileID: 365829343}
   m_Layer: 0
   m_Name: Simulation
   m_TagString: Untagged
@@ -3482,7 +3483,7 @@ MonoBehaviour:
   rotator: {fileID: 0}
   controlsTracker: {fileID: 0}
   furnitureParent: {fileID: 377209599}
-  editorFallback: {fileID: 11400000, guid: 5422f4721e165b963bfc11ad202f24e1, type: 2}
+  editorFallback: {fileID: 11400000, guid: 97e68c7c04f0e2212b5f5f35916b7ffc, type: 2}
   feedbackScene: FeedbackXR
   menuScene: MainMenuXR
 --- !u!4 &365829342
@@ -3500,6 +3501,22 @@ Transform:
   m_Children: []
   m_Father: {fileID: 438506034}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &365829343
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 365829337}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 722b99e95b7666d4b9d927bf2732a878, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: AssemblyWorkshop.XRInteraction::AssemblyWorkshop.XRInteraction.XRAssemblyCommands
+  graph: {fileID: 1608151981}
+  snapper: {fileID: 1608151979}
+  undoButton: 2
+  detachButton: 8
 --- !u!1 &376571691
 GameObject:
   m_ObjectHideFlags: 0
@@ -9406,7 +9423,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1263233259
 Transform:
   m_ObjectHideFlags: 0
@@ -9919,6 +9936,85 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!1 &1335721500
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1335721503}
+  - component: {fileID: 1335721502}
+  - component: {fileID: 1335721501}
+  m_Layer: 0
+  m_Name: ISDK_SnapZone (XRGroupTemplate)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!54 &1335721501
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1335721500}
+  serializedVersion: 5
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!114 &1335721502
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1335721500}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06bd28341d3e86a4c8ab52b1a0269c7b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _interactorFilters: []
+  _maxInteractors: -1
+  _maxSelectingInteractors: -1
+  _data: {fileID: 0}
+  _rigidbody: {fileID: 1335721501}
+  _snapPoseDelegate: {fileID: 0}
+  _movementProvider: {fileID: 0}
+--- !u!4 &1335721503
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1335721500}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0, y: 0, z: 0}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1338399875
 GameObject:
   m_ObjectHideFlags: 0
@@ -9929,6 +10025,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1338399876}
   - component: {fileID: 1338399877}
+  - component: {fileID: 1338399878}
   m_Layer: 0
   m_Name: Feedback
   m_TagString: Untagged
@@ -9970,6 +10067,22 @@ MonoBehaviour:
   failureColor: {r: 0.95, g: 0.3, b: 0.25, a: 1}
   amount: 0.35
   failureFlashDuration: 0.6
+--- !u!114 &1338399878
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1338399875}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50df8a2fbbc013448afdccf65ffa74ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: AssemblyWorkshop.Feedback::AssemblyWorkshop.Feedback.JointGhost
+  detector: {fileID: 1608151980}
+  ghostMaterial: {fileID: 2100000, guid: 44270ef9b39ee60449152287ce223183, type: 2}
+  hideDistance: 0.003
+  hideAngle: 1
 --- !u!1 &1338402610
 GameObject:
   m_ObjectHideFlags: 0
@@ -11597,7 +11710,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1608151978}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -12771,6 +12884,67 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!1001 &1826977511
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2344186885639182941, guid: a81367b1c4a818e379919a9da9bb0246, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2344186885639182941, guid: a81367b1c4a818e379919a9da9bb0246, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2344186885639182941, guid: a81367b1c4a818e379919a9da9bb0246, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2344186885639182941, guid: a81367b1c4a818e379919a9da9bb0246, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2344186885639182941, guid: a81367b1c4a818e379919a9da9bb0246, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2344186885639182941, guid: a81367b1c4a818e379919a9da9bb0246, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2344186885639182941, guid: a81367b1c4a818e379919a9da9bb0246, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2344186885639182941, guid: a81367b1c4a818e379919a9da9bb0246, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2344186885639182941, guid: a81367b1c4a818e379919a9da9bb0246, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2344186885639182941, guid: a81367b1c4a818e379919a9da9bb0246, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7018338262306384995, guid: a81367b1c4a818e379919a9da9bb0246, type: 3}
+      propertyPath: m_Name
+      value: Bitacora
+      objectReference: {fileID: 0}
+    - target: {fileID: 8334266151625886325, guid: a81367b1c4a818e379919a9da9bb0246, type: 3}
+      propertyPath: config
+      value: 
+      objectReference: {fileID: 11400000, guid: b3d9066261d108f49b899710cd7f1074, type: 2}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: a81367b1c4a818e379919a9da9bb0246, type: 3}
 --- !u!1 &1834882614
 GameObject:
   m_ObjectHideFlags: 0
@@ -14686,3 +14860,5 @@ SceneRoots:
   - {fileID: 793901543}
   - {fileID: 377209599}
   - {fileID: 438506034}
+  - {fileID: 1335721503}
+  - {fileID: 1826977511}
