@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d222c96f3a1c2a85b3fcdb78f731e08, type: 3}
   m_Name: BitacoraConfig_Quest
   m_EditorClassIdentifier: Bitacora.Runtime::Bitacora.BitacoraConfig
-  backend: 1
+  backend: 0
   apiBaseUrl: https://agencies-evans-bureau-mesh.trycloudflare.com
   apiKey: bk__Zgr_CZrosOVGpC1k-fLoOGBYiXnzXhAthxBh0NMsh8
   simulationId: taller-ensamblado

@@ -16,6 +16,7 @@ namespace AssemblyWorkshop.Feedback
     {
         private static readonly int BaseColorId = Shader.PropertyToID("_BaseColor");
 
+        [Tooltip("Optional. Highlights the selected group, in versions that select pieces before moving them.")]
         [SerializeField] private PieceSelection selection;
         [SerializeField] private JointDetector detector;
 
@@ -42,8 +43,7 @@ namespace AssemblyWorkshop.Feedback
 
         private void Awake()
         {
-            isValid = Guard.Required(selection, nameof(selection), this)
-                & Guard.Required(detector, nameof(detector), this);
+            isValid = Guard.Required(detector, nameof(detector), this);
 
             if (!isValid)
             {
@@ -61,7 +61,11 @@ namespace AssemblyWorkshop.Feedback
                 return;
             }
 
-            selection.SelectionChanged += OnSelectionChanged;
+            if (selection != null)
+            {
+                selection.SelectionChanged += OnSelectionChanged;
+            }
+
             detector.CandidateChanged += OnCandidateChanged;
             detector.AttemptFailed += OnAttemptFailed;
         }
@@ -73,7 +77,11 @@ namespace AssemblyWorkshop.Feedback
                 return;
             }
 
-            selection.SelectionChanged -= OnSelectionChanged;
+            if (selection != null)
+            {
+                selection.SelectionChanged -= OnSelectionChanged;
+            }
+
             detector.CandidateChanged -= OnCandidateChanged;
             detector.AttemptFailed -= OnAttemptFailed;
         }

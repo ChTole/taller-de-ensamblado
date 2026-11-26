@@ -672,6 +672,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: AssemblyWorkshop.Joints::AssemblyWorkshop.Joints.JointDetector
   graph: {fileID: 227680393}
+  angleTolerance: 8
   lateralTolerance: 0.02
   approachDistance: 0.03
   coincidenceTolerance: 0.002
@@ -688,6 +689,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: AssemblyWorkshop.Joints::AssemblyWorkshop.Joints.AssemblyGraph
   workArea: {fileID: 1840423526}
+  groupTemplate: {fileID: 0}
 --- !u!4 &227680394
 Transform:
   m_ObjectHideFlags: 0
@@ -2191,12 +2193,11 @@ MonoBehaviour:
   graph: {fileID: 227680393}
   detector: {fileID: 227680392}
   snapper: {fileID: 227680391}
-  dragger: {fileID: 1277343896}
-  rotator: {fileID: 1277343894}
   helpTracker: {fileID: 1254205410}
+  rotator: {fileID: 1277343894}
   controlsTracker: {fileID: 1254205411}
   furnitureParent: {fileID: 88959480}
-  editorFallback: {fileID: 0}
+  editorFallback: {fileID: 11400000, guid: 5422f4721e165b963bfc11ad202f24e1, type: 2}
   feedbackScene: Feedback
   menuScene: MainMenu
 --- !u!114 &1254205408
@@ -3602,6 +3603,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4294967295
   rotationSpeed: 540
+  settlePieces: 1
   settleSpeed: 1.5
 --- !u!1 &1842570115
 GameObject:

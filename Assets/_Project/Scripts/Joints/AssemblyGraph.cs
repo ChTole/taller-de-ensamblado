@@ -15,9 +15,18 @@ namespace AssemblyWorkshop.Joints
     {
         [SerializeField] private WorkArea workArea;
 
+        [Tooltip("Optional. Prefab each group is created from, for example with a rigidbody and grab components. Empty: groups are plain objects.")]
+        [SerializeField] private GameObject groupTemplate;
+
         public event Action<JointPair> JointConnected;
         public event Action<JointPair> JointDisconnected;
         public event Action AssemblyCompleted;
+
+        /// <summary>A group was created: at registration, when groups merge or when one is split.</summary>
+        public event Action<PieceGroup> GroupCreated;
+
+        /// <summary>A group started being held, by any means of interaction.</summary>
+        public event Action<PieceGroup> GroupGrabbed;
 
         /// <summary>
         /// A group was released, raised at the exact moment of release, before it starts settling or falling.
@@ -113,7 +122,7 @@ namespace AssemblyWorkshop.Joints
             groupsParent = furnitureRoot.transform;
             foreach (AssemblyPiece piece in pieces)
             {
-                AddGroup(PieceGroup.Create(new[] { piece }, groupsParent, workArea));
+                AddGroup(PieceGroup.Create(new[] { piece }, groupsParent, workArea, groupTemplate));
             }
 
             return true;
@@ -287,7 +296,7 @@ namespace AssemblyWorkshop.Joints
                 members.AddRange(group.Pieces);
             }
 
-            PieceGroup merged = AddGroup(PieceGroup.Create(members, groupsParent, workArea));
+            PieceGroup merged = AddGroup(PieceGroup.Create(members, groupsParent, workArea, groupTemplate));
 
             foreach (PieceGroup group in involved)
             {
@@ -316,7 +325,7 @@ namespace AssemblyWorkshop.Joints
             RemoveGroup(group);
             foreach (HashSet<AssemblyPiece> part in parts)
             {
-                AddGroup(PieceGroup.Create(part, groupsParent, workArea));
+                AddGroup(PieceGroup.Create(part, groupsParent, workArea, groupTemplate));
             }
 
             group.Dissolve(null);
@@ -325,14 +334,22 @@ namespace AssemblyWorkshop.Joints
         private PieceGroup AddGroup(PieceGroup group)
         {
             groups.Add(group);
+            group.Grabbed += OnGroupGrabbed;
             group.Released += OnGroupReleased;
+            GroupCreated?.Invoke(group);
             return group;
         }
 
         private void RemoveGroup(PieceGroup group)
         {
             groups.Remove(group);
+            group.Grabbed -= OnGroupGrabbed;
             group.Released -= OnGroupReleased;
+        }
+
+        private void OnGroupGrabbed(PieceGroup group)
+        {
+            GroupGrabbed?.Invoke(group);
         }
 
         private void OnGroupReleased(PieceGroup group)

@@ -12174,7 +12174,7 @@ GameObject:
   - component: {fileID: 2040620023}
   - component: {fileID: 2040620022}
   m_Layer: 0
-  m_Name: Plane
+  m_Name: WorkArea
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

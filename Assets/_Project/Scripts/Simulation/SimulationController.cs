@@ -21,9 +21,10 @@ namespace AssemblyWorkshop.Simulation
         [SerializeField] private AssemblyGraph graph;
         [SerializeField] private JointDetector detector;
         [SerializeField] private JointSnapper snapper;
-        [SerializeField] private PieceDragger dragger;
-        [SerializeField] private PieceRotator rotator;
         [SerializeField] private HelpTracker helpTracker;
+
+        [Tooltip("Optional. Counts the 90° rotations, in versions that rotate pieces with commands.")]
+        [SerializeField] private PieceRotator rotator;
 
         [Tooltip("Optional. Measures how the controls are consulted during the simulation.")]
         [SerializeField] private ControlsTracker controlsTracker;
@@ -74,8 +75,6 @@ namespace AssemblyWorkshop.Simulation
             isValid = Guard.Required(graph, nameof(graph), this)
                 & Guard.Required(detector, nameof(detector), this)
                 & Guard.Required(snapper, nameof(snapper), this)
-                & Guard.Required(dragger, nameof(dragger), this)
-                & Guard.Required(rotator, nameof(rotator), this)
                 & Guard.Required(helpTracker, nameof(helpTracker), this)
                 & Guard.Required(furnitureParent, nameof(furnitureParent), this);
         }
@@ -90,8 +89,12 @@ namespace AssemblyWorkshop.Simulation
             detector.AttemptFailed += OnAttemptFailed;
             snapper.Undone += OnUndone;
             snapper.Detached += OnDetached;
-            dragger.DragStarted += OnDragStarted;
-            rotator.Rotated += OnRotated;
+            graph.GroupGrabbed += OnGroupGrabbed;
+
+            if (rotator != null)
+            {
+                rotator.Rotated += OnRotated;
+            }
         }
 
         private void OnDisable()
@@ -104,8 +107,12 @@ namespace AssemblyWorkshop.Simulation
             detector.AttemptFailed -= OnAttemptFailed;
             snapper.Undone -= OnUndone;
             snapper.Detached -= OnDetached;
-            dragger.DragStarted -= OnDragStarted;
-            rotator.Rotated -= OnRotated;
+            graph.GroupGrabbed -= OnGroupGrabbed;
+
+            if (rotator != null)
+            {
+                rotator.Rotated -= OnRotated;
+            }
         }
 
         private void Start()
@@ -243,7 +250,7 @@ namespace AssemblyWorkshop.Simulation
         private void OnAttemptFailed(JointFailure failure) => failedAttempts++;
         private void OnUndone(IReadOnlyList<JointPair> pairs) => undos++;
         private void OnDetached(AssemblyPiece piece, IReadOnlyList<JointPair> pairs) => detaches++;
-        private void OnDragStarted(PieceGroup group) => grabs++;
+        private void OnGroupGrabbed(PieceGroup group) => grabs++;
         private void OnRotated(PieceGroup group) => rotations++;
 
         private void LoadScene(string sceneName)

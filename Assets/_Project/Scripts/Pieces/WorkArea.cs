@@ -23,12 +23,16 @@ namespace AssemblyWorkshop.Pieces
         [Tooltip("Rotation speed, in degrees per second.")]
         [SerializeField, Min(1f)] private float rotationSpeed = 540f;
 
+        [Tooltip("Lower released pieces onto the surface and keep them from going through it. Turn it off when the pieces use physics.")]
+        [SerializeField] private bool settlePieces = true;
+
         [Tooltip("Speed at which a released piece settles onto the surface, in meters per second.")]
         [SerializeField, Min(0.01f)] private float settleSpeed = 1.5f;
 
         public float SurfaceHeight => transform.position.y;
         public LayerMask PieceLayers => pieceLayers;
         public float RotationSpeed => rotationSpeed;
+        public bool SettlePieces => settlePieces;
         public float SettleSpeed => settleSpeed;
 
         /// <summary>
