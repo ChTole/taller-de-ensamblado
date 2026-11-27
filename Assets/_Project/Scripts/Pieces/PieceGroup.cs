@@ -8,7 +8,7 @@ namespace AssemblyWorkshop.Pieces
     /// <summary>
     /// A set of pieces that move together. Every piece always belongs to one group:
     /// at first, its own; once joined, the group of all the connected pieces.
-    /// The group is what gets grabbed, rotated and settled onto the surface.
+    /// The group is what gets grabbed, rotated and settled onto the surface (or, with physics, what has the rigidbody).
     /// Groups are created and dissolved by AssemblyGraph.
     /// </summary>
     [DisallowMultipleComponent]
@@ -30,7 +30,8 @@ namespace AssemblyWorkshop.Pieces
         /// <summary>A locked group cannot be grabbed or rotated, and does not settle onto the surface.</summary>
         public bool IsLocked { get; set; }
 
-        public bool IsRotating => Quaternion.Angle(transform.rotation, goalRotation) > 0.01f;
+        /// <summary>A rotation requested with TryRotate is still being animated.</summary>
+        public bool IsRotating => hasRotationGoal;
 
         /// <summary>Vertical distance between the group position and its bottom.</summary>
         public float BottomOffset => transform.position.y - GetBounds().min.y;
@@ -40,12 +41,16 @@ namespace AssemblyWorkshop.Pieces
         private WorkArea workArea;
         private Quaternion goalRotation = Quaternion.identity;
         private Vector3 rotationPivot;
+        private bool hasRotationGoal;
         private bool isDissolved;
 
         /// <summary>
         /// Creates a group with the given pieces. Its pivot is placed at the center of the pieces.
+        /// If a template is given, the group object is an instance of it (for example, with a rigidbody
+        /// and grab components); otherwise it is an empty object.
         /// </summary>
-        public static PieceGroup Create(IEnumerable<AssemblyPiece> members, Transform parent, WorkArea area)
+        public static PieceGroup Create(IEnumerable<AssemblyPiece> members, Transform parent, WorkArea area,
+            GameObject template = null)
         {
             if (area == null)
             {
@@ -53,9 +58,16 @@ namespace AssemblyWorkshop.Pieces
             }
 
             var list = new List<AssemblyPiece>(members);
-            var groupObject = new GameObject("Group");
-            groupObject.transform.SetParent(parent, worldPositionStays: false);
-            groupObject.transform.SetPositionAndRotation(ComputeCenter(list), Quaternion.identity);
+            Vector3 center = ComputeCenter(list);
+            GameObject groupObject = template != null
+                ? Instantiate(template, center, Quaternion.identity, parent)
+                : new GameObject("Group");
+
+            if (template == null)
+            {
+                groupObject.transform.SetParent(parent, worldPositionStays: false);
+                groupObject.transform.SetPositionAndRotation(center, Quaternion.identity);
+            }
 
             PieceGroup group = groupObject.AddComponent<PieceGroup>();
             group.workArea = area;
@@ -103,18 +115,23 @@ namespace AssemblyWorkshop.Pieces
                 return;
             }
 
-            if (IsRotating)
+            if (hasRotationGoal)
             {
                 Quaternion next = Quaternion.RotateTowards(
                     transform.rotation, goalRotation, workArea.RotationSpeed * Time.deltaTime);
                 Quaternion step = next * Quaternion.Inverse(transform.rotation);
                 transform.SetPositionAndRotation(rotationPivot + step * (transform.position - rotationPivot), next);
+                hasRotationGoal = Quaternion.Angle(next, goalRotation) > 0.01f;
             }
 
-            KeepOnSurface();
+            if (workArea.SettlePieces)
+            {
+                KeepOnSurface();
+            }
         }
 
         /// <summary>
+        /// Only when the work area settles pieces (without physics).
         /// Keeps the group from going through the surface and, when it is not held, lowers it until it rests
         /// on the surface or on another piece. While rotating, it rises and lowers as if tipping over.
         /// </summary>
@@ -160,7 +177,10 @@ namespace AssemblyWorkshop.Pieces
                 return false;
             }
 
-            Quaternion newGoal = AxisAlignment.SnapRotation(Quaternion.AngleAxis(angle, worldAxis) * goalRotation);
+            // Without a rotation in progress, the base is the current rotation: the group may have been
+            // rotated by other means, such as a hand
+            Quaternion current = hasRotationGoal ? goalRotation : AxisAlignment.SnapRotation(transform.rotation);
+            Quaternion newGoal = AxisAlignment.SnapRotation(Quaternion.AngleAxis(angle, worldAxis) * current);
             Quaternion delta = newGoal * Quaternion.Inverse(transform.rotation);
             LayerMask mask = workArea.PieceLayers;
 
@@ -173,6 +193,7 @@ namespace AssemblyWorkshop.Pieces
 
             goalRotation = newGoal;
             rotationPivot = pivot;
+            hasRotationGoal = true;
             return true;
         }
 

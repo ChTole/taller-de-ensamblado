@@ -24,17 +24,20 @@ namespace AssemblyWorkshop.Joints
 
     /// <summary>
     /// A possible fit: which group moves, toward which one, which joints are formed
-    /// and the required movement, split into lateral alignment and insertion.
+    /// and the required movement: a rotation about the base of the tenon that lines it up,
+    /// then a translation split into lateral alignment and insertion.
     /// </summary>
     public sealed class JointMatch
     {
         public JointMatch(PieceGroup movingGroup, PieceGroup targetGroup, IReadOnlyList<JointPair> pairs,
-            bool movesTenon, Vector3 lateralOffset, Vector3 axialOffset)
+            bool movesTenon, Quaternion rotation, Vector3 pivot, Vector3 lateralOffset, Vector3 axialOffset)
         {
             MovingGroup = movingGroup;
             TargetGroup = targetGroup;
             Pairs = pairs;
             MovesTenon = movesTenon;
+            Rotation = rotation;
+            Pivot = pivot;
             LateralOffset = lateralOffset;
             AxialOffset = axialOffset;
         }
@@ -47,6 +50,13 @@ namespace AssemblyWorkshop.Joints
 
         public JointPair Primary => Pairs[0];
         public bool MovesTenon { get; }
+
+        /// <summary>Rotation applied to the moving group, about Pivot. Identity when it is already lined up.</summary>
+        public Quaternion Rotation { get; }
+
+        /// <summary>Base of the tenon before the fit: the point the moving group turns about.</summary>
+        public Vector3 Pivot { get; }
+
         public Vector3 LateralOffset { get; }
         public Vector3 AxialOffset { get; }
 

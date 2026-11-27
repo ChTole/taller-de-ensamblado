@@ -13,12 +13,12 @@ namespace AssemblyWorkshop.Joints
     [DisallowMultipleComponent]
     public class JointDetector : MonoBehaviour
     {
-        // Cosine of the maximum angle between two axes to consider them aligned (about 8°)
-        private const float AlignmentThreshold = 0.99f;
-
         [SerializeField] private AssemblyGraph graph;
 
         [Header("Tolerances")]
+        [Tooltip("Maximum angle, in degrees, between the tenon and the mortise axis, and of roll around it. The fit corrects the difference. About 8° suits the mouse; about 15° suits hands.")]
+        [SerializeField, Range(1f, 30f)] private float angleTolerance = 8f;
+
         [Tooltip("Maximum sideways distance between the base of the tenon and the axis of the mortise.")]
         [SerializeField, Min(0f)] private float lateralTolerance = 0.02f;
 
@@ -48,7 +48,9 @@ namespace AssemblyWorkshop.Joints
 
         // A through mortise has two entries
         private readonly Entry[] entries = new Entry[2];
-        private PieceGroup trackedGroup;
+
+        // Cosine of the angle tolerance, to compare it with dot products
+        private float AlignmentCosine => Mathf.Cos(angleTolerance * Mathf.Deg2Rad);
 
         private void Awake()
         {
@@ -58,16 +60,27 @@ namespace AssemblyWorkshop.Joints
             }
         }
 
+        private void OnEnable()
+        {
+            if (graph != null)
+            {
+                graph.GroupReleased += HandleRelease;
+            }
+        }
+
+        private void OnDisable()
+        {
+            if (graph != null)
+            {
+                graph.GroupReleased -= HandleRelease;
+            }
+        }
+
         private void Update()
         {
+            // Only the candidate for the highlight is polled. The release is handled by the event,
+            // at the exact pose where the piece was released, before it starts settling or falling.
             PieceGroup held = graph.FindHeldGroup();
-
-            if (trackedGroup != null && trackedGroup != held)
-            {
-                HandleRelease(trackedGroup);
-            }
-
-            trackedGroup = held;
             SetCurrent(held != null ? FindMatch(held) : null);
         }
 
@@ -121,6 +134,7 @@ namespace AssemblyWorkshop.Joints
             JointPair bestPair = default;
             Entry bestEntry = default;
             bool bestMovesTenon = false;
+            Quaternion bestCorrection = Quaternion.identity;
 
             foreach (JointPoint own in graph.Joints)
             {
@@ -138,17 +152,20 @@ namespace AssemblyWorkshop.Joints
 
                     JointPoint tenon = own.Kind == JointKind.Tenon ? own : other;
                     JointPoint mortise = own.Kind == JointKind.Mortise ? own : other;
+                    bool movesTenon = tenon == own;
                     int count = FillEntries(mortise);
 
                     for (int i = 0; i < count; i++)
                     {
-                        if (TryEvaluate(tenon, entries[i], out float score) && score < bestScore)
+                        if (TryEvaluate(tenon, entries[i], movesTenon, out float score, out Quaternion correction)
+                            && score < bestScore)
                         {
                             found = true;
                             bestScore = score;
                             bestPair = new JointPair(tenon, mortise);
                             bestEntry = entries[i];
-                            bestMovesTenon = tenon == own;
+                            bestMovesTenon = movesTenon;
+                            bestCorrection = correction;
                         }
                     }
                 }
@@ -159,37 +176,41 @@ namespace AssemblyWorkshop.Joints
                 return null;
             }
 
-            // Movement that brings the base of the tenon to the entry of the mortise
-            Vector3 tenonPosition = bestPair.Tenon.transform.position;
-            Vector3 fullDelta = bestMovesTenon
-                ? bestEntry.Position - tenonPosition
-                : tenonPosition - bestEntry.Position;
+            // The moving group first turns about the base of the tenon, so that the tenon lines up with the mortise.
+            // If the mortise side is the one moving, its entry turns with it.
+            Vector3 pivot = bestPair.Tenon.transform.position;
+            Entry entry = bestMovesTenon ? bestEntry : Move(bestEntry, bestCorrection, pivot, Vector3.zero);
+
+            // Then it moves so that the base of the tenon reaches the entry of the mortise
+            Vector3 fullDelta = bestMovesTenon ? entry.Position - pivot : pivot - entry.Position;
 
             PieceGroup target = (bestMovesTenon ? bestPair.Mortise : bestPair.Tenon).Piece.Group;
-            Vector3 movingDirection = bestMovesTenon ? bestEntry.Forward : -bestEntry.Forward;
+            Vector3 movingDirection = bestMovesTenon ? entry.Forward : -entry.Forward;
 
             var pairs = new List<JointPair> { bestPair };
-            CollectSimultaneousPairs(moving, target, fullDelta, movingDirection, pairs);
+            CollectSimultaneousPairs(moving, target, bestCorrection, pivot, fullDelta, movingDirection, pairs);
 
             // If pieces would overlap in the final position (for example, a second tenon
             // that does not line up with its mortise), the fit is not possible
-            if (PieceCollision.WouldOverlap(moving, fullDelta, Quaternion.identity, Vector3.zero, graph.WorkArea.PieceLayers))
+            if (PieceCollision.WouldOverlap(moving, fullDelta, bestCorrection, pivot, graph.WorkArea.PieceLayers))
             {
                 return null;
             }
 
-            Vector3 axial = Vector3.Project(fullDelta, bestEntry.Forward);
-            return new JointMatch(moving, target, pairs, bestMovesTenon, fullDelta - axial, axial);
+            Vector3 axial = Vector3.Project(fullDelta, entry.Forward);
+            return new JointMatch(moving, target, pairs, bestMovesTenon, bestCorrection, pivot, fullDelta - axial, axial);
         }
 
         /// <summary>
         /// Additional joints formed by the same movement, for example when closing a frame,
-        /// where one piece enters two mortises at once.
+        /// where one piece enters two mortises at once. Joints of the moving group are evaluated
+        /// at their final pose: after the correction and the translation.
         /// </summary>
-        private void CollectSimultaneousPairs(PieceGroup moving, PieceGroup target, Vector3 delta,
-            Vector3 movingDirection, List<JointPair> pairs)
+        private void CollectSimultaneousPairs(PieceGroup moving, PieceGroup target, Quaternion correction,
+            Vector3 pivot, Vector3 delta, Vector3 movingDirection, List<JointPair> pairs)
         {
             var used = new HashSet<JointPoint> { pairs[0].Tenon, pairs[0].Mortise };
+            float cosine = AlignmentCosine;
 
             foreach (JointPoint own in graph.Joints)
             {
@@ -208,22 +229,34 @@ namespace AssemblyWorkshop.Joints
                     JointPoint tenon = own.Kind == JointKind.Tenon ? own : other;
                     JointPoint mortise = own.Kind == JointKind.Mortise ? own : other;
                     bool movesTenon = tenon == own;
-                    Vector3 tenonFinal = tenon.transform.position + (movesTenon ? delta : Vector3.zero);
+
+                    Transform tenonTransform = tenon.transform;
+                    Vector3 tenonPosition = tenonTransform.position;
+                    Vector3 tenonForward = tenonTransform.forward;
+                    Vector3 tenonUp = tenonTransform.up;
+
+                    if (movesTenon)
+                    {
+                        tenonPosition = pivot + correction * (tenonPosition - pivot) + delta;
+                        tenonForward = correction * tenonForward;
+                        tenonUp = correction * tenonUp;
+                    }
+
                     int count = FillEntries(mortise);
                     bool added = false;
 
                     for (int i = 0; i < count && !added; i++)
                     {
-                        Entry entry = entries[i];
+                        Entry entry = movesTenon ? entries[i] : Move(entries[i], correction, pivot, delta);
                         Vector3 direction = movesTenon ? entry.Forward : -entry.Forward;
 
-                        if (Vector3.Dot(direction, movingDirection) < AlignmentThreshold || !IsAligned(tenon, entry))
+                        if (Vector3.Dot(direction, movingDirection) < cosine
+                            || !IsAligned(tenonForward, tenonUp, IsSquare(tenon), entry))
                         {
                             continue;
                         }
 
-                        Vector3 entryFinal = entry.Position + (movesTenon ? Vector3.zero : delta);
-                        if ((tenonFinal - entryFinal).magnitude <= coincidenceTolerance)
+                        if ((tenonPosition - entry.Position).magnitude <= coincidenceTolerance)
                         {
                             pairs.Add(new JointPair(tenon, mortise));
                             used.Add(tenon);
@@ -262,6 +295,7 @@ namespace AssemblyWorkshop.Joints
 
                     JointPoint tenon = own.Kind == JointKind.Tenon ? own : other;
                     JointPoint mortise = own.Kind == JointKind.Mortise ? own : other;
+                    bool movesTenon = tenon == own;
                     Transform tenonTransform = tenon.transform;
                     Vector3 tip = tenonTransform.position + tenonTransform.forward * tenon.Length;
 
@@ -276,10 +310,10 @@ namespace AssemblyWorkshop.Joints
                         distance = Mathf.Min(distance,
                             Mathf.Min((tenonTransform.position - entry.Position).magnitude, (tip - entry.Position).magnitude));
 
-                        if (IsAligned(tenon, entry))
+                        if (IsAligned(tenonTransform.forward, tenonTransform.up, IsSquare(tenon), entry))
                         {
                             aligned = true;
-                            inRange |= TryEvaluate(tenon, entry, out _);
+                            inRange |= TryEvaluate(tenon, entry, movesTenon, out _, out _);
                         }
                     }
 
@@ -319,21 +353,27 @@ namespace AssemblyWorkshop.Joints
         }
 
         /// <summary>
-        /// Evaluates whether the tenon is in position to enter through that entry.
-        /// The lower the score, the better placed it is.
+        /// Evaluates whether the tenon is in position to enter through that entry, once the moving group
+        /// is turned to line it up. The lower the score, the better placed it is.
+        /// 'correction' is the rotation to apply to the moving group, about the base of the tenon.
         /// </summary>
-        private bool TryEvaluate(JointPoint tenon, Entry entry, out float score)
+        private bool TryEvaluate(JointPoint tenon, Entry entry, bool movesTenon, out float score, out Quaternion correction)
         {
             score = float.MaxValue;
 
-            if (!IsAligned(tenon, entry))
+            if (!TryGetCorrection(tenon, entry, movesTenon, out correction))
             {
                 return false;
             }
 
-            Vector3 offset = tenon.transform.position - entry.Position;
-            float along = Vector3.Dot(offset, entry.Forward);
-            float lateral = (offset - entry.Forward * along).magnitude;
+            // The base of the tenon is the pivot of the correction, so it does not move.
+            // If the mortise side moves, its entry turns about that point.
+            Vector3 pivot = tenon.transform.position;
+            Entry aligned = movesTenon ? entry : Move(entry, correction, pivot, Vector3.zero);
+
+            Vector3 offset = pivot - aligned.Position;
+            float along = Vector3.Dot(offset, aligned.Forward);
+            float lateral = (offset - aligned.Forward * along).magnitude;
 
             // 'along' is negative while the base of the tenon is in front of the entry.
             // At -Length, the tip touches the entry.
@@ -347,24 +387,76 @@ namespace AssemblyWorkshop.Joints
         }
 
         /// <summary>
-        /// The tenon points into the mortise and has the right roll around that axis.
-        /// Rolled 180° it also fits; with a square cross-section, any multiple of 90° fits.
+        /// Rotation that lines the tenon up with the entry: the same axis and the closest valid roll.
+        /// It is applied to the moving group: the tenon side, or the mortise side in reverse.
+        /// Returns false if the difference is beyond the angle tolerance.
         /// </summary>
-        private static bool IsAligned(JointPoint tenon, Entry entry)
+        private bool TryGetCorrection(JointPoint tenon, Entry entry, bool movesTenon, out Quaternion correction)
         {
+            correction = Quaternion.identity;
             Transform tenonTransform = tenon.transform;
+            bool isSquare = IsSquare(tenon);
 
-            if (Vector3.Dot(tenonTransform.forward, entry.Forward) < AlignmentThreshold)
+            if (!IsAligned(tenonTransform.forward, tenonTransform.up, isSquare, entry))
             {
                 return false;
             }
 
-            if (tenon.Profile != null && tenon.Profile.IsSquare)
+            Vector3 up = ClosestValidUp(tenonTransform.up, entry, isSquare);
+            Quaternion tenonGoal = Quaternion.LookRotation(entry.Forward, up);
+            Quaternion toGoal = tenonGoal * Quaternion.Inverse(tenonTransform.rotation);
+            correction = movesTenon ? toGoal : Quaternion.Inverse(toGoal);
+            return true;
+        }
+
+        /// <summary>
+        /// The tenon points into the mortise and has a valid roll around that axis, within the angle tolerance.
+        /// Rolled 180° it also fits; with a square cross-section, any roll fits and is corrected to the closest 90°.
+        /// </summary>
+        private bool IsAligned(Vector3 tenonForward, Vector3 tenonUp, bool isSquare, Entry entry)
+        {
+            float cosine = AlignmentCosine;
+
+            if (Vector3.Dot(tenonForward, entry.Forward) < cosine)
             {
-                return true;
+                return false;
             }
 
-            return Mathf.Abs(Vector3.Dot(tenonTransform.up, entry.Up)) >= AlignmentThreshold;
+            return isSquare || Mathf.Abs(Vector3.Dot(tenonUp, entry.Up)) >= cosine;
+        }
+
+        /// <summary>Roll the tenon should have in the mortise: the valid "up" closest to the current one.</summary>
+        private static Vector3 ClosestValidUp(Vector3 tenonUp, Entry entry, bool isSquare)
+        {
+            Vector3 best = Vector3.Dot(tenonUp, entry.Up) >= 0f ? entry.Up : -entry.Up;
+
+            if (isSquare)
+            {
+                Vector3 right = Vector3.Cross(entry.Up, entry.Forward);
+                Vector3 side = Vector3.Dot(tenonUp, right) >= 0f ? right : -right;
+                if (Vector3.Dot(tenonUp, side) > Vector3.Dot(tenonUp, best))
+                {
+                    best = side;
+                }
+            }
+
+            return best;
+        }
+
+        private static bool IsSquare(JointPoint tenon)
+        {
+            return tenon.Profile != null && tenon.Profile.IsSquare;
+        }
+
+        /// <summary>The entry after turning it about 'pivot' and translating it.</summary>
+        private static Entry Move(Entry entry, Quaternion rotation, Vector3 pivot, Vector3 translation)
+        {
+            return new Entry
+            {
+                Position = pivot + rotation * (entry.Position - pivot) + translation,
+                Forward = rotation * entry.Forward,
+                Up = rotation * entry.Up
+            };
         }
 
         private int FillEntries(JointPoint mortise)

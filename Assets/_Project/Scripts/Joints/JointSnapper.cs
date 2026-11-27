@@ -22,7 +22,7 @@ namespace AssemblyWorkshop.Joints
         [SerializeField] private JointDetector detector;
 
         [Header("Animation")]
-        [Tooltip("Duration of the alignment with the mortise axis, in seconds.")]
+        [Tooltip("Duration of the alignment with the mortise axis (turn and sideways shift), in seconds.")]
         [SerializeField, Min(0.01f)] private float alignDuration = 0.15f;
 
         [Tooltip("Duration of the tenon insertion, in seconds.")]
@@ -78,7 +78,7 @@ namespace AssemblyWorkshop.Joints
         }
 
         /// <summary>
-        /// Animated fit: first aligns the tenon with the mortise axis, then inserts it.
+        /// Animated fit: first lines the tenon up with the mortise axis (turning and shifting it), then inserts it.
         /// When finished, AssemblyGraph merges the groups.
         /// </summary>
         private IEnumerator SnapRoutine(JointMatch match)
@@ -89,7 +89,7 @@ namespace AssemblyWorkshop.Joints
             moving.IsLocked = true;
             target.IsLocked = true;
 
-            yield return Translate(moving.transform, match.LateralOffset, alignDuration);
+            yield return Align(moving.transform, match.Rotation, match.Pivot, match.LateralOffset, alignDuration);
             yield return Translate(moving.transform, match.AxialOffset, insertDuration);
 
             moving.IsLocked = false;
@@ -260,6 +260,23 @@ namespace AssemblyWorkshop.Joints
             }
 
             return false;
+        }
+
+        /// <summary>Turns the object 'rotation' about 'pivot' while shifting it 'offset', both gradually.</summary>
+        private static IEnumerator Align(Transform target, Quaternion rotation, Vector3 pivot, Vector3 offset, float duration)
+        {
+            Vector3 startPosition = target.position;
+            Quaternion startRotation = target.rotation;
+            float t = 0f;
+
+            while (t < 1f)
+            {
+                t = Mathf.Min(1f, t + Time.deltaTime / duration);
+                float s = Mathf.SmoothStep(0f, 1f, t);
+                Quaternion step = Quaternion.Slerp(Quaternion.identity, rotation, s);
+                target.SetPositionAndRotation(pivot + step * (startPosition - pivot) + offset * s, step * startRotation);
+                yield return null;
+            }
         }
 
         private static IEnumerator Translate(Transform target, Vector3 delta, float duration)

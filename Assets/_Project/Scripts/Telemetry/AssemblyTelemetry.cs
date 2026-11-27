@@ -157,14 +157,30 @@ namespace AssemblyWorkshop.Telemetry
 
         private void OnAssemblyStarted(FurnitureDefinition furniture)
         {
+            string device = GetDevice();
+
             Track("assembly_started", new
             {
                 furniture_id = furniture.FurnitureId,
                 app_version = Application.version,
                 pieces = graph.Pieces.Count,
                 joints = graph.TotalJoints,
-                mobile = Application.isMobilePlatform
+                device,
+                // Kept for sessions recorded before 'device' existed. A headset runs Android,
+                // so it would report itself as mobile: it is excluded here.
+                mobile = device == "mobile"
             });
+        }
+
+        /// <summary>Kind of device the assembly runs on: "xr" (headset), "mobile" or "desktop".</summary>
+        private static string GetDevice()
+        {
+            if (UnityEngine.XR.XRSettings.isDeviceActive)
+            {
+                return "xr";
+            }
+
+            return Application.isMobilePlatform ? "mobile" : "desktop";
         }
 
         private void OnJointConnected(JointPair pair)

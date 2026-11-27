@@ -1,0 +1,20 @@
+{
+    "name": "AssemblyWorkshop.XRInteraction",
+    "rootNamespace": "AssemblyWorkshop.XRInteraction",
+    "references": [
+        "AssemblyWorkshop.Common",
+        "AssemblyWorkshop.Pieces",
+        "AssemblyWorkshop.Joints",
+        "Oculus.Interaction",
+        "Oculus.VR"
+    ],
+    "includePlatforms": ["Android", "Editor"],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
