@@ -15,7 +15,7 @@ MonoBehaviour:
   backend: 0
   apiBaseUrl: http://127.0.0.1:8000
   apiKey: dev-key
-  simulationId: talller-ensamblado
+  simulationId: taller-ensamblado
   requestTimeoutSeconds: 10
   participantMode: 0
   batchSize: 10

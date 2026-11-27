@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Meta.XR.ImmersiveDebugger.DevAgent::Meta.XR.ImmersiveDebugger.DevAgent.RuntimeSettings
   enabled: 0
   serverAddress: 192.168.0.158
-  serverPort: 48735
+  serverPort: 0
   useVoiceSdkForInput: 0
   witConfiguration: {fileID: 0}
   witClientAccessToken: 
